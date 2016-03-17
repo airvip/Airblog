@@ -9,20 +9,20 @@ body{background-color: #EEEEEE;}
 	padding: 20px;
 }
 
-/* Ð¡ÆÁÄ»£¨Æ½°å£¬´óÓÚµÈÓÚ 768px£© */
+/* å°å±å¹•ï¼ˆå¹³æ¿ï¼Œå¤§äºŽç­‰äºŽ 768pxï¼‰ */
 @media (min-width: 768px) {
 	.form-display{
 		width: 400px;
 	}
 }
-/* ÖÐµÈÆÁÄ»£¨×ÀÃæÏÔÊ¾Æ÷£¬´óÓÚµÈÓÚ 992px£© */
+/* ä¸­ç­‰å±å¹•ï¼ˆæ¡Œé¢æ˜¾ç¤ºå™¨ï¼Œå¤§äºŽç­‰äºŽ 992pxï¼‰ */
 @media (min-width: 992px) {
 	.form-display{
 		width: 400px;
 	}
 }
 
-/* ´óÆÁÄ»£¨´ó×ÀÃæÏÔÊ¾Æ÷£¬´óÓÚµÈÓÚ 1200px£© */
+/* å¤§å±å¹•ï¼ˆå¤§æ¡Œé¢æ˜¾ç¤ºå™¨ï¼Œå¤§äºŽç­‰äºŽ 1200pxï¼‰ */
 @media (min-width: 1200px) {
 	.form-display{
 		width: 400px;
