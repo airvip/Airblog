@@ -5,10 +5,10 @@
 
 	<div id="wrapper">
 		<include file="Common/sidebar"/>
-		
-		
-	    <!--BEGIN PAGE WRAPPER-->
-	    <div id="page-wrapper">
+
+
+		<!--BEGIN PAGE WRAPPER-->
+		<div id="page-wrapper">
 
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
 			<div class="page-title-breadcrumb option-demo">
@@ -21,7 +21,7 @@
 						<button type="button" data-hover="tooltip" title="" class="btn btn-yellow" data-original-title="Send Message">
 							<i class="fa fa-envelope-o"></i>
 						</button>
-						
+
 					</div>
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">
@@ -36,9 +36,11 @@
 			<!--END TITLE & BREADCRUMB PAGE-->
 
 
-	        <!--BEGIN CONTENT-->
-	        <div class="page-content">
-	            <div id="tab-general">
+			<!--BEGIN CONTENT-->
+			<div class="page-content">
+				<div id="tab-general">
+
+
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="portlet box">
@@ -59,38 +61,31 @@
 							</div>
 						</div>
 					</div>
+
+
 				</div>
 			</div>
-	                	<!--END CONTENT-->
+			<!--END CONTENT-->
 
 			<include file="Common/footer"/>
-	                	
-	    </div>
-	            <!--END PAGE WRAPPER-->
-    </div>
+
+		</div>
+		<!--END PAGE WRAPPER-->
+	</div>
 </div>
 
 
+<script>
+	$('#side-menu>li').removeClass('active');
+	$('#admin-index').addClass('active');
+
+	$(document).ready(function(){
 
 
-	<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
-    <script src="__ADMIN_PUBLIC__/js/jquery-migrate-1.2.1.min.js"></script>
 
-  	<script src="__ADMIN_PUBLIC__/js/index.js"></script>
 
-    <script src="__ADMIN_PUBLIC__/js/main.js"></script>
-	
-	<script>
-		$('#side-menu>li').removeClass('active');
-		$('#admin-index').addClass('active');
-		
-		$(document).ready(function(){
-            
-                
-				
-				
-        });
-	</script>
+	});
+</script>
 
 </body>
 </html>
