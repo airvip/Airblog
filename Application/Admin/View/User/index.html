@@ -1,0 +1,259 @@
+<include file="Common/header"/>
+<div>
+
+	<include file="Common/topbar"/>
+
+
+	<div id="wrapper">
+		<!--BEGIN SIDEBAR MENU-->
+		<include file="Common/sidebar"/>
+		<!--END SIDEBAR MENU-->
+          
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper">
+
+			<!--BEGIN TITLE & BREADCRUMB PAGE-->
+
+			<div class="page-title-breadcrumb option-demo">
+				<div class="page-header pull-right">
+					<div class="page-toolbar">
+						<a href="{:U('User/add')}" type="button" title="新增会员" class="btn btn-blue" >
+							<i class="fa fa-plus-square"></i>
+						</a>
+						&nbsp;
+						<a type="button" href="{:U('User/index',array('u_type'=>1))}" title="" class="btn btn-success" >
+							管理员管理
+						</a>
+						&nbsp;
+						<a type="button" href="{:U('User/index',array('u_type'=>0))}" title="" class="btn btn-success" >
+							用户管理
+						</a>
+					</div>
+				</div>
+				<ol class="breadcrumb page-breadcrumb pull-left">					
+					<li>
+						<a href="{:U('User/index')}">会员管理</a>/
+					</li>
+					<li>会员列表 </li>
+				</ol>
+				<div class="clearfix">
+				</div>
+			</div>
+
+			<!--END TITLE & BREADCRUMB PAGE-->
+
+
+            <!--BEGIN CONTENT-->
+            <div class="page-content">
+         		<div id="tab-general">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="portlet box">
+								<div class="panel-heading">
+								
+									<form class="navbar-form navbar-right" action="{:U('User/search')}" method="post" role="search" >
+                                        <div class="form-group">
+                                        	<input type="text" name="search" class="form-control" placeholder="会员ID或昵称">
+										</div>
+                                        <button class="btn btn-green" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+                                    </form>
+									<div class="clearfix"></div>
+								
+								</div>
+								<div class="portlet-body">
+									<table class="table table-hover table-striped user-table">
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>会员头像</th>
+												<th>会员昵称</th>
+												<th>会员类型</th>
+												<th>是否认证</th>
+												<th>是否禁用</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<volist name="list" id="vo" empty="暂时没有数据">
+												<tr>
+													<td>{$vo.u_id}</td>
+													<td>
+														<if condition="$vo[u_avatar]">
+															<img class="img-responsive img-circle" width="30" src="__ROOT__/Uploads/Face/{$vo.u_avatar}">
+														<else/>
+															<img class="img-responsive img-circle" width="30" src="__PUBLIC__/images/avatar/a1.jpg">
+														</if>
+													</td>
+													<td>{$vo.u_nickname}</td>
+													<td>
+														<if condition="$vo[u_type] eq 0">
+															用户
+														<else/>
+															管理员
+														</if>
+													</td>
+													<td>
+														<if condition="$vo[u_auth] eq 1">
+															<span class="label label-success">已认证</span>
+														<else/>
+															<span class="label label-warning">未认证</span>
+														</if>
+													</td>
+													<td>
+														<if condition="$vo[u_state] eq 0">
+															正常
+															<a class="btn btn-warning" >
+																<i class="fa fa-frown-o user-free"  attr="{$vo[u_id]}" ustate="1" title="点击禁用"></i>
+															</a>
+														<else/>
+															已禁用
+															<a class="btn btn-success" >
+																<i class="fa fa-smile-o user-free" attr="{$vo[u_id]}" ustate="0" title="点击恢复"></i>
+															</a>
+														</if>
+													</td>
+													<td id="user-fa">
+														<a class="btn btn-primary" href="{:U('User/see',array('u_id'=>$vo[u_id]))}">
+															<i class="fa  fa-eye" title="查看详情"></i>
+														</a> 
+														<a class="btn btn-pink">
+															<i class="fa fa-key user-pass" attr="{$vo[u_id]}" title="初始化密码"></i>
+														</a>  
+														<a class="btn btn-warning" href="{:U('User/edit',array('u_id'=>$vo[u_id]))}">
+															<i class="fa fa-pencil-square-o" title="编辑"></i>
+														</a> 
+														<a class="btn btn-danger" href="{:U('User/delete',array('u_id'=>$vo[u_id]))}">
+															<i class="fa fa-trash-o" attr="{$vo[u_id]}" title="删除"></i>
+														</a> 
+													</td>
+												</tr>
+											</volist>
+										</tbody>
+									</table>
+								</div>
+								<div class="panel-heading">
+									<div id="page">
+										{$page}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	                	<!--END CONTENT-->
+
+
+	                	<!--BEGIN FOOTER-->
+			<include file="Common/footer"/>
+	               	<!--END FOOTER-->
+        </div>
+        <!--END PAGE WRAPPER-->
+	</div>
+</div>
+
+
+
+
+    <script src="__PUBLIC__/script/jquery-1.10.2.min.js"></script>
+    <script src="__PUBLIC__/script/jquery-migrate-1.2.1.min.js"></script>
+    <script src="__PUBLIC__/script/jquery-ui.js"></script>
+    <script src="__PUBLIC__/script/bootstrap.min.js"></script>
+    <script src="__PUBLIC__/script/bootstrap-hover-dropdown.js"></script>
+    <script src="__PUBLIC__/script/html5shiv.js"></script>
+    <script src="__PUBLIC__/script/respond.min.js"></script>
+    <script src="__PUBLIC__/script/jquery.metisMenu.js"></script>
+    <script src="__PUBLIC__/script/jquery.slimscroll.js"></script>
+    <script src="__PUBLIC__/script/jquery.cookie.js"></script>
+    <script src="__PUBLIC__/script/icheck.min.js"></script>
+    <script src="__PUBLIC__/script/custom.min.js"></script>
+    <script src="__PUBLIC__/script/jquery.news-ticker.js"></script>
+    <script src="__PUBLIC__/script/jquery.menu.js"></script>
+    <script src="__PUBLIC__/script/pace.min.js"></script>
+    <script src="__PUBLIC__/script/holder.js"></script>
+    <script src="__PUBLIC__/script/responsive-tabs.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.categories.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.pie.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.tooltip.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.resize.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.fillbetween.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.stack.js"></script>
+    <script src="__PUBLIC__/script/jquery.flot.spline.js"></script>
+    <script src="__PUBLIC__/script/zabuto_calendar.min.js"></script>
+  	<script src="__PUBLIC__/script/index.js"></script>
+  <!--LOADING SCRIPTS FOR CHARTS-->
+   <!-- <script src="__PUBLIC__/script/highcharts.js"></script>
+  //  <script src="__PUBLIC__/script/data.js"></script>
+  //  <script src="__PUBLIC__/script/drilldown.js"></script>
+  //  <script src="__PUBLIC__/script/exporting.js"></script>
+  //  <script src="__PUBLIC__/script/highcharts-more.js"></script>
+  //  <script src="__PUBLIC__/script/charts-highchart-pie.js"></script>
+  // <script src="__PUBLIC__/script/charts-highchart-more.js"></script> -->
+    <!--CORE JAVASCRIPT-->
+    <script src="__PUBLIC__/script/main.js"></script>
+	
+	<script>
+		$('#side-menu>li').removeClass('active');
+		$('#admin-user').addClass('active');
+		
+		
+		$('.user-free').click(function(){
+			var id=$(this).attr('attr');
+			var state=$(this).attr('ustate');
+			$.ajax({
+				type:'post',
+				url:'{:U("User/free")}',
+//				data:'u_state='+id,
+				data:{
+					'u_id':id,
+					'u_state':state,
+				},
+				dataType:"json",
+				success:function(data){
+					if(data.code){
+						alert(data.mess);
+						self.location='{:U("User/index")}';
+						return;
+					}else{
+						alert(data.mess);
+						return;
+					}
+				},
+			});
+		});
+		
+		$(".user-pass").click(function(){
+			var rs=confirm('你确定把密码初始化为123456吗?');
+			var id=$(this).attr('attr');
+			if(rs){
+				$.ajax({
+					type:'post',
+					url:'{:U("User/userPass")}',
+					data:{
+						'u_id':id,
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.code){
+							alert(data.mess);
+							return;
+						}else{
+							alert(data.mess);
+							return;
+						}
+					},
+				});
+			}else{
+				return;
+			}
+		});
+		
+		
+	</script>
+
+</body>
+</html>
