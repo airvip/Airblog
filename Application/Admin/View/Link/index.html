@@ -1,0 +1,176 @@
+<include file="Common/header"/>
+<div>
+
+	<include file="Common/topbar"/>
+
+
+	<div id="wrapper">
+		<!--BEGIN SIDEBAR MENU-->
+		<include file="Common/sidebar"/>
+		<!--END SIDEBAR MENU-->
+          
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper">
+
+			<!--BEGIN TITLE & BREADCRUMB PAGE-->
+
+			<div class="page-title-breadcrumb option-demo">
+				<div class="page-header pull-right">
+					<div class="page-toolbar">
+						<a href="{:U('Link/add')}" type="button" title="新增友情链接" class="btn btn-blue" >
+							<i class="fa fa-plus-square"></i>
+						</a>
+						
+					</div>
+				</div>
+				<ol class="breadcrumb page-breadcrumb pull-left">					
+					<li>
+						<a href="{:U('Link/index')}">友情链接</a>/
+					</li>
+					<li>友情链接列表 </li>
+				</ol>
+				<div class="clearfix">
+				</div>
+			</div>
+
+			<!--END TITLE & BREADCRUMB PAGE-->
+
+
+            <!--BEGIN CONTENT-->
+            <div class="page-content">
+         		<div id="tab-general">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="portlet box">
+								<div class="panel-heading">
+								
+									<form class="navbar-form navbar-right" action="{:U('Link/search')}" method="post" role="search" >
+                                        <div class="form-group">
+                                        	<input type="text" name="lk_name" class="form-control" placeholder="请输入网站名称">
+										</div>
+                                        <button class="btn btn-green" type="submit">
+											<i class="fa fa-search"></i>
+										</button>
+                                    </form>
+									<div class="clearfix"></div>
+								
+								</div>
+								<div class="portlet-body">
+									<table class="table table-hover table-striped user-table">
+										<colgroup>
+											<col/>
+											<col/>
+					                        <col width="200"/>
+					                    </colgroup>
+										<thead>
+											<tr>
+												<th>#</th>
+												<th>连接名称</th>
+												<th>链接地址</th>
+												<th>是否显示</th>
+												<th>排序</th>
+												<th>创建时间</th>
+												<th>操作</th>
+											</tr>
+										</thead>
+										<tbody>
+											
+											<volist name="list" id="vo" empty="暂时没有数据">
+												<tr>
+													<td>{$vo.lk_id}</td>
+													<td>{$vo.lk_name}</td>
+													<td>
+														<div class="content-hidden" title="{$vo.lk_url}">
+															{$vo.lk_url}
+														</div>
+													</td>
+													<td>
+														<if condition="$vo[lk_show] eq 0">
+															不显示
+														<else/>
+															显示
+														</if>
+													</td>
+													<td>
+														<input type="text"  class="form-control len-50 link-order" attr="{$vo['lk_id']}" value="{$vo['lk_order']}">
+													</td>
+													<td>
+														{$vo['lk_time']||date='Y-m-d H:i',###}
+													</td>
+													<td id="user-fa">
+														
+														<a class="btn btn-warning" href="{:U('Link/edit',array('lk_id'=>$vo[lk_id]))}">
+															<i class="fa fa-pencil-square-o" title="编辑"></i>
+														</a> 
+														<a class="btn btn-danger" href="{:U('Link/delete',array('lk_id'=>$vo[lk_id]))}">
+															<i class="fa fa-trash-o" attr="{$vo[lk_id]}" title="删除"></i>
+														</a> 
+													</td>
+												</tr>
+											</volist>
+										</tbody>
+									</table>
+								</div>
+								<div class="panel-heading">
+									<div id="page">
+										{$page}
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	                	<!--END CONTENT-->
+
+
+	                	<!--BEGIN FOOTER-->
+			<include file="Common/footer"/>
+	               	<!--END FOOTER-->
+        </div>
+        <!--END PAGE WRAPPER-->
+	</div>
+</div>
+
+	
+	<script>
+		$('#side-menu>li').removeClass('active');
+		$('#admin-link').addClass('active');
+		
+		
+		$('.link-order').blur(function(){
+			var id=$(this).attr('attr');
+			var lk_order=parseInt($(this).val());
+			
+			if(lk_order>=0 && lk_order<=10){
+				$.ajax({
+					type:'post',
+					url:"{:U('Link/order')}",
+	//				data:'u_state='+id,
+					data:{
+						'lk_id':id,
+						'lk_order':lk_order,
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.code){
+							alert(data.mess);
+							self.location='{:U("Link/index")}';
+							return;
+						}else{
+							alert(data.mess);
+							return;
+						}
+					},
+				});
+			}else{
+				alert('排序值必须在0-10之间');return;
+			}
+		});
+		
+		
+		
+	</script>
+
+</body>
+</html>

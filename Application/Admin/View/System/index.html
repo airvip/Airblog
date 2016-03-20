@@ -1,0 +1,214 @@
+<include file="Common/header"/>
+<div>
+
+	<include file="Common/topbar"/>
+
+
+	<div id="wrapper">
+		<!--BEGIN SIDEBAR MENU-->
+		<include file="Common/sidebar"/>
+		<!--END SIDEBAR MENU-->
+          
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper">
+
+			<!--BEGIN TITLE & BREADCRUMB PAGE-->
+
+			<div class="page-title-breadcrumb option-demo">
+				<div class="page-header pull-right">
+					<div class="page-toolbar">
+						<a href="###" type="button" title="新增" class="btn btn-blue" >
+							<i class="fa fa-plus-square"></i>
+						</a>
+						
+					</div>
+				</div>
+				<ol class="breadcrumb page-breadcrumb pull-left">					
+					<li>
+						<a href="{:U('System/index')}">系统管理</a>/
+					</li>
+					<li>网站配置 </li>
+				</ol>
+				<div class="clearfix">
+				</div>
+			</div>
+
+			<!--END TITLE & BREADCRUMB PAGE-->
+
+
+            <!--BEGIN CONTENT-->
+            <div class="page-content">
+         		<div id="tab-general">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="portlet box">
+								
+								<div class="portlet-body">
+									<form action="{:U('System/indexRun')}" method="post" class="form-horizontal">
+										<h3>网站配置</h3>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">网站名称</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="web_name" required value="{$config.WEB_NAME}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">网站根目录</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="web_url" required value="{$config.WEB_URL}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group"><label class="col-sm-3 control-label">版权信息</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="copy" required value="{$config.COPY}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">是否开启注册</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6 line-34">
+														<if condition="$config.REGIS_ON eq 0">
+															<label >
+																<input type="radio" value="0" name="regis_on" checked="checked"/>
+																允许注册
+															</label>
+															<label >
+																<input type="radio" value="1" name="regis_on"/>
+																不允许注册
+															</label>
+														<else/>
+															<label >
+																<input type="radio" value="0" name="regis_on" />
+																允许注册
+															</label>
+															<label >
+																<input type="radio" value="1" name="regis_on" checked="checked" />
+																不允许注册
+															</label>
+														
+														</if>
+															
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">后台每页数量</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6 line-34">
+														<switch name="config.ADMIN_PAGE">
+														    <case value="10">
+																<label >
+																	<input type="radio" value="10" name="admin_page" checked="checked"/>
+																	10
+																</label>
+																<label >
+																	<input type="radio" value="15" name="admin_page"/>
+																	15
+																</label>
+																<label >
+																	<input type="radio" value="20" name="admin_page"/>
+																	20
+																</label>
+															</case>
+														    <case value="15">
+																<label >
+																	<input type="radio" value="10" name="admin_page"/>
+																	10
+																</label>
+																<label >
+																	<input type="radio" value="15" name="admin_page"  checked="checked"/>
+																	15
+																</label>
+																<label >
+																	<input type="radio" value="20" name="admin_page"/>
+																	20
+																</label>
+															</case>
+														    <default />
+																<label >
+																	<input type="radio" value="10" name="admin_page"/>
+																	10
+																</label>
+																<label >
+																	<input type="radio" value="15" name="admin_page"  />
+																	15
+																</label>
+																<label >
+																	<input type="radio" value="20" name="admin_page" checked="checked"/>
+																	20
+																</label>
+														</switch>
+													
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<hr/>
+										<h3>SEO优化</h3>
+										<div class="form-group"><label class="col-sm-3 control-label">关键词</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-9">
+														<input type="text" name="key_word" required value="{$config.KEY_WORD}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">内容描述</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-9">
+														<textarea class="form-control" name="description" required rows="3">{$config.DESCRIPTION}</textarea>
+													</div>
+												</div>
+											</div>
+										</div>
+										
+										<hr/>
+										<button type="submit" class="btn btn-green btn-block">创建</button>
+									</form>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	                	<!--END CONTENT-->
+
+
+	                	<!--BEGIN FOOTER-->
+			<include file="Common/footer"/>
+	               	<!--END FOOTER-->
+        </div>
+        <!--END PAGE WRAPPER-->
+	</div>
+</div>
+
+	
+	<script>
+		$('#side-menu>li').removeClass('active');
+		$('#admin-system').addClass('active');
+		
+		
+	</script>
+
+</body>
+</html>
