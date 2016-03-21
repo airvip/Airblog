@@ -20,8 +20,8 @@ class LoginController extends Controller {
             'user_type' => 0
         );
         $admin  = $this->user->where($map)->find();
-        if($admin === false)$this->error('系统出现了不可预知的问题...');
-        if($admin['id'] === null)$this->error('账户或密码错误...');
+        if(false === $admin)$this->error('系统出现了不可预知的问题...');
+        if(null === $admin)$this->error('账户或密码错误...');
         $_SESSION['user']['id'] = $admin['id'];
         $this->redirect('Admin/Index/index');
     }
