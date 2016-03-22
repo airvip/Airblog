@@ -7046,4 +7046,4 @@ ul.chats li.out .message {
 
 .bgwhite{background-color:#FFFFFF;}
 .margin-top2{margin-top:2rem;}
-.profile-table>tbody>tr>td::nth-child(1){text-align: right;}
+.profile-table>tbody>tr>td::nth-child(1){text-align: right !important;}
