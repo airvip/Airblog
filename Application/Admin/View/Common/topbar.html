@@ -5,20 +5,12 @@
 	<div id="header-topbar-option-demo" class="page-header-topbar">
 		<nav id="topbar" role="navigation" style="margin-bottom: 0;" data-step="3" class="navbar navbar-default navbar-static-top">
 			<div class="navbar-header">
-				<button type="button" data-toggle="collapse" data-target=".sidebar-collapse" class="navbar-toggle">
-					<span class="sr-only">Toggle navigation</span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-					<span class="icon-bar"></span>
-				</button>
-				<a id="logo" href="index.html" class="navbar-brand">
-					<span class="fa fa-rocket"></span>
-					<span class="logo-text">Air</span>
-					<span style="display: none" class="logo-text-icon">µ</span>
+				<a id="logo" href="{:U('Home/Index/index')}" class="navbar-brand">
+					<span class="logo-text" title="前台首页">Air</span>
 				</a>
 			</div>
 			<div class="topbar-main">
-				<a id="menu-toggle" href="#" class="hidden-xs">
+				<a id="menu-toggle" class="hidden-xs">
 					<i class="fa fa-bars"></i>
 				</a>
 
@@ -35,15 +27,19 @@
 
 					<li class="dropdown topbar-user">
 						<a data-hover="dropdown" href="#" class="dropdown-toggle">
-							<img src="<if condition='$admin["u_avatar"]'>__ROOT__/Uploads/Face/{$admin.u_avatar}<else/>__PUBLIC__/images/avatar/a1.jpg</if>" alt="" class="img-responsive img-circle"/>&nbsp;
-							<span class="hidden-xs">阿尔维奇</span>&nbsp;
+							<if condition="!empty($admin['avatar']) && file_exists($admin['avatar'])">
+								<img class="img-responsive img-circle" src="__ROOT__/Uploads/{$admin['avatar']}">
+							<else/>
+								<img class="img-responsive img-circle" src="__PUBLIC__/img/default_avatar.jpg">
+							</if>
+							<span class="hidden-xs">阿尔维奇</span>
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu dropdown-user pull-right">
 							<li><a href="#"><i class="fa fa-user"></i>我的主页</a></li>
 							<li class="divider"></li>
 							<li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
-							<li><a href="{:U('Login/logout')}"><i class="fa fa-key"></i>退出登录</a></li>
+							<li><a href="{:U('Admin/Login/logout')}"><i class="fa fa-key"></i>退出登录</a></li>
 						</ul>
 					</li>
 

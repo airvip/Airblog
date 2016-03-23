@@ -78,7 +78,7 @@
 												<tr>
 													<td attr="{$vo['id']}">{$key+1}</td>
 													<td>
-														<if condition="!empty($vo['avatar']) || file_exists($vo['avatar'])">
+														<if condition="!empty($vo['avatar']) && file_exists($vo['avatar'])">
 															<img class="img-responsive img-circle" width="20" src="__ROOT__/Uploads/{$vo['avatar']}">
 														<else/>
 															<img class="img-responsive img-circle" width="20" src="__PUBLIC__/img/default_avatar.jpg">

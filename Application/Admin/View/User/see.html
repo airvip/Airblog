@@ -63,45 +63,39 @@
 								
 									<div class="form-group">
 										<div class="text-center profile-img">
-											
-											<if condition="$user['u_avatar']">
-												<img class="img-responsive img-circle"  src="__ROOT__/Uploads/Face/{$user.u_avatar}">
+											<if condition="!empty($vo['avatar']) && file_exists($vo['avatar'])">
+												<img class="img-responsive img-circle center-block" width="100" src="__ROOT__/Uploads/{$user['avatar']}">
 											<else/>
-												<img class="img-responsive img-circle" src="__PUBLIC__/images/avatar/a1.jpg">
+												<img class="img-responsive img-circle center-block" width="100" src="__PUBLIC__/img/default_avatar.jpg">
 											</if>
-											
 										</div> 
 									</div>
-									<table class="table table-striped table-hover profile-table">
+									<table class="table table-striped table-hover" id="use-show-information">
 										<tbody>
 											<tr>
-												<td>会员昵称</td>
-												<td>{$user.u_nickname}</td>
+												<td>用户昵称</td>
+												<td>{$user['nickname']}</td>
+											</tr>
+											<tr>
+												<td>电子邮箱</td>
+												<td>{:empty($user['user_email']) ? '未知' : $user['user_email']}</td>
 											</tr>
 											<tr>
 												<td>会员状态</td>
 												<td>
-													<if condition="$user.u_state eq 0">
-														正常
-													<else/>
-														冻结
-													</if>
+													{:$user[user_type] == 1 ? '正常':'冻结'}
 												</td>
 											</tr>
 											<tr>
-												<td>是否认证</td>
+												<td>用户类型</td>
 												<td>
-													<if condition="$user.u_auth eq 1">
-														已认证
-													<else/>
-														未认证
-													</if>
+													{:$user[user_type] == 1 ? '用户':'管理员'}
 												</td>
 											</tr>
 											<tr>
 												<td>性别</td>
 												<td>
-													<switch name="user.u_sex">
+													<switch name="user['sex']">
 													    <case value="1">男</case>
 													    <case value="2">女</case>
 													    <default />保密
@@ -109,27 +103,57 @@
 												</td>
 											</tr>
 											<tr>
-												<td>真实姓名</td>
+												<td>所在国家</td>
 												<td>
-													{$user.u_truename}
+													{:empty($user['country']) ? '未知' : $user['country']}
 												</td>
 											</tr>
 											<tr>
-												<td>身份证号</td>
+												<td>所在省</td>
 												<td>
-													{$user.u_idcartnum}
+													{:empty($user['province']) ? '未知' : $user['province']}
 												</td>
 											</tr>
 											<tr>
-												<td>电子邮箱</td>
+												<td>所在城市</td>
 												<td>
-													{$user.u_email}
+													{:empty($user['city']) ? '未知' : $user['city']}
+												</td>
+											</tr>
+											<tr>
+												<td>详细地址</td>
+												<td>
+													{:empty($user['address']) ? '未知' : $user['address']}
+												</td>
+											</tr>
+											<tr>
+												<td>上次登录时间</td>
+												<td>
+													{:empty($user['last_time']) ? '未知' : date('Y-m-d H:i:s',$user['last_time'])}
+												</td>
+											</tr>
+											<tr>
+												<td>上次登录IP</td>
+												<td>
+													{:empty($user['last_ip']) ? '未知' : long2ip($user['last_ip'])}
+												</td>
+											</tr>
+											<tr>
+												<td>本次登录时间</td>
+												<td>
+													{:empty($user['login_time']) ? '未知' : date('Y-m-d H:i:s',$user['login_time'])}
+												</td>
+											</tr>
+											<tr>
+												<td>本次登录IP</td>
+												<td>
+													{:empty($user['login_ip']) ? '未知' : long2ip($user['login_ip'])}
 												</td>
 											</tr>
 											<tr>
 												<td>创建时间</td>
 												<td>
-													{$user.u_time|date='Y-m-d H:i',###}
+													{:empty($user['create_time']) ? '未知' : date('Y-m-d H:i:s',$user['create_time'])}
 												</td>
 											</tr>
 											

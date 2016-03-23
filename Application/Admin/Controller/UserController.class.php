@@ -33,6 +33,8 @@ class UserController extends CommonController {
             -> join(array('a left join __USER_INFO__ b on a.id=b.user_id'))
             -> where($map)
             -> find();
+        if(false === $user)$this->error('系统出现了不可预知的问题...');
+        if(null === $user)$this->error('该用户不存在...');
         $this->assign('user',$user);
         $this->display();
     }

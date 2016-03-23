@@ -28,6 +28,21 @@ function ajax_return($code = 0,$data = '',$mess = ''){
     echo json_encode($temp);exit;
 };
 
+//获取真实IP（discuz）
+function getIp(){
+    $onlineip='';
+    if(getenv('HTTP_CLIENT_IP')&&strcasecmp(getenv('HTTP_CLIENT_IP'),'unknown')){
+        $onlineip=getenv('HTTP_CLIENT_IP');
+    } elseif(getenv('HTTP_X_FORWARDED_FOR')&&strcasecmp(getenv('HTTP_X_FORWARDED_FOR'),'unknown')){
+        $onlineip=getenv('HTTP_X_FORWARDED_FOR');
+    } elseif(getenv('REMOTE_ADDR')&&strcasecmp(getenv('REMOTE_ADDR'),'unknown')){
+        $onlineip=getenv('REMOTE_ADDR');
+    } elseif(isset($_SERVER['REMOTE_ADDR'])&&$_SERVER['REMOTE_ADDR']&&strcasecmp($_SERVER['REMOTE_ADDR'],'unknown')){
+        $onlineip=$_SERVER['REMOTE_ADDR'];
+    }
+    return $onlineip;
+}
+
 //字符串截取函数
 function cut_str($string, $sublen, $start = 0, $code = 'UTF-8') {
     if($code == 'UTF-8') {
