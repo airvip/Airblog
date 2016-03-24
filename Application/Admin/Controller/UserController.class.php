@@ -9,13 +9,13 @@ class UserController extends CommonController {
     }
     //用户列表
     public function index(){
-        $user_type  = empty(I('user_type')) ? 1 : 0;
+        $user_type  = empty(I('user_type')) ? '' : I('user_type');
         $map    = array(
-            'user_type' => $user_type
+            'user_type'     => $user_type,
+            'user_status'   => array('neq',2)
         );
         $list   = $this->page($this->user,C('ADMIN_PAGE'),$map,'id DESC');
         if(false === $list)$this->error('系统出现了不可预知的问题...');
-        if(null === $list)$this->error('账户或密码错误...');
         $this->assign('list',$list);
         $this->display();
     }
@@ -39,7 +39,48 @@ class UserController extends CommonController {
         $this->display();
     }
 
+    //显示编辑页面
+    public function edit(){
+        if(!IS_GET)$this->error('非法操作');
+        $temp   = I('user_id');
+        $map    = array('id' => $temp);
+        $field  = 'a.id,a.nickname,a.user_email,a.avatar,a.user_status,
+                a.user_type,b.sex,b.country,b.province,b.city,b.address,b.create_time';
+        $user   = $this->user
+            -> field($field)
+            -> join(array('a left join __USER_INFO__ b on a.id=b.user_id'))
+            -> where($map)
+            -> find();
+        if(false === $user)$this->error('系统出现了不可预知的问题...');
+        if(null === $user)$this->error('该用户不存在...');
+        $this->assign('user',$user);
+        $this->display();
+    }
 
+    //删除用户（假删除user_status=2）
+    public function delete(){
+        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        $temp   = I('post.');
+        $data   = array(
+            'id'            => $temp['user_id'],
+            'user_status' => 2
+        );
+        $rs=$this->user->save($data);
+        if(!$rs)ajax_return(0,'','删除用户失败');
+        ajax_return(1,'','删除用户成功');
+    }
+
+    //查找
+    public function search(){
+        if(!IS_POST)$this->error('非法操作');
+        $temp   = I('post.');
+        if(empty($temp['search']))$this->error('搜索内容不能为空');
+        $map    = array($temp['name']=>array('like','%'.$temp['search'].'%'));
+        $list   = $this->page($this->user,C('ADMIN_PAGE'),$map,'id DESC');
+        if(false === $list)$this->error('系统出现了不可预知的问题...');
+        $this->assign('list',$list);
+        $this->display('Admin@User/index');
+    }
 
 
 
@@ -57,7 +98,7 @@ class UserController extends CommonController {
     }
 
     //初始化用户密码
-    public function userPass(){
+    public function user_pass(){
         if(!IS_AJAX) ajax_return(0,'','非法操作');
         $temp   = I('post.');
         $data   = array(

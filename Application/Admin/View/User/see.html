@@ -15,20 +15,21 @@
 			<!--BEGIN TITLE & BREADCRUMB PAGE-->
 
 			<div class="page-title-breadcrumb option-demo">
+
 				<div class="page-header pull-right">
 					<div class="page-toolbar">
-						<a type="button" href="{:U('Admin/User/index',array('u_type'=>1))}" title="" class="btn btn-success" >
-							管理员管理
+
+						<a type="button" href="{:U('User/index',array('user_type'=>1))}" title="" class="btn btn-success" >
+							会员管理
 						</a>
-						&nbsp;
-						<a type="button" href="{:U('Admin/User/index',array('u_type'=>0))}" title="" class="btn btn-success" >
-							用户管理
+						<a type="button" href="{:U('User/index',array('user_type'=>0))}" title="" class="btn btn-success" >
+							管理员管理
 						</a>
 					</div>
 				</div>
-				<ol class="breadcrumb page-breadcrumb pull-left">					
+				<ol class="breadcrumb page-breadcrumb pull-left">
 					<li>
-						<a href="{:U('Admin/User/index',array('user_type'=>1))}">会员管理</a>/
+						<a href="{:U('Admin/User/index')}">用户管理</a>/
 					</li>
 					<li>详细信息 </li>
 				</ol>
@@ -45,20 +46,6 @@
 					<div class="row">
 						<div class="col-lg-12">
 							<div class="portlet box">
-								<div class="panel-heading">
-								
-									<form class="navbar-form navbar-right" action="{:U('User/search')}" method="post" role="search" >
-                                        <div class="form-group">
-                                        	<input type="text" name="search" class="form-control" placeholder="会员ID或昵称">
-										</div>
-                                        <button class="btn btn-green" type="submit">
-											<i class="fa fa-search"></i>
-										</button>
-                                    </form>
-									<div class="clearfix"></div>
-								
-								</div>
-								
 								<div class="portlet-body">
 								
 									<div class="form-group">
@@ -81,15 +68,15 @@
 												<td>{:empty($user['user_email']) ? '未知' : $user['user_email']}</td>
 											</tr>
 											<tr>
-												<td>会员状态</td>
+												<td>用户状态</td>
 												<td>
-													{:$user[user_type] == 1 ? '正常':'冻结'}
+													{:$user['user_status'] == 1 ? '正常':'冻结'}
 												</td>
 											</tr>
 											<tr>
 												<td>用户类型</td>
 												<td>
-													{:$user[user_type] == 1 ? '用户':'管理员'}
+													{:$user['user_type'] == 1 ? '用户':'管理员'}
 												</td>
 											</tr>
 											<tr>
@@ -180,37 +167,10 @@
 
 	
 	<script>
-		$('#side-menu>li').removeClass('active');
-		$('#admin-user').addClass('active');
-		
-		
-		$('.user-free').click(function(){
-//			$(this).dialog();
-			var id=$(this).attr('attr');
-			var state=$(this).attr('ustate');
-			$.ajax({
-				type:'post',
-				url:'{:U("User/free")}',
-				data:{
-					'u_id':id,
-					'u_state':state,
-				},
-				dataType:"json",
-				success:function(data){
-					if(data.code){
-						alert(data.mess);
-						self.location='{:U("User/index")}';
-						return;
-					}else{
-						alert(data.mess);
-						return;
-					}
-				},
-			});
+		$(function(){
+			$('#side-menu>li').removeClass('active');
+			$('#admin-user').addClass('active');
 		});
-		
-		
-		
 	</script>
 
 </body>

@@ -1,0 +1,195 @@
+<include file="Common/header"/>
+<div>
+
+	<include file="Common/topbar"/>
+
+
+	<div id="wrapper">
+		<!--BEGIN SIDEBAR MENU-->
+		<include file="Common/sidebar"/>
+		<!--END SIDEBAR MENU-->
+          
+        <!--BEGIN PAGE WRAPPER-->
+        <div id="page-wrapper">
+
+			<!--BEGIN TITLE & BREADCRUMB PAGE-->
+
+			<div class="page-title-breadcrumb option-demo">
+				<div class="page-header pull-right">
+					<div class="page-toolbar">
+
+						<a type="button" href="{:U('User/index',array('user_type'=>1))}" title="" class="btn btn-success" >
+							会员管理
+						</a>
+						<a type="button" href="{:U('User/index',array('user_type'=>0))}" title="" class="btn btn-success" >
+							管理员管理
+						</a>
+					</div>
+				</div>
+				<ol class="breadcrumb page-breadcrumb pull-left">
+					<li>
+						<a href="{:U('Admin/User/index')}">用户管理</a>/
+					</li>
+					<li>信息编辑</li>
+				</ol>
+				<div class="clearfix">
+				</div>
+			</div>
+
+			<!--END TITLE & BREADCRUMB PAGE-->
+
+
+            <!--BEGIN CONTENT-->
+            <div class="page-content">
+         		<div id="tab-general">
+					<div class="row">
+						<div class="col-lg-12">
+							<div class="portlet box">
+								<div class="portlet-body" id="user-edit-information">
+									<h3>基本信息</h3><hr>
+									<form action="{:U('User/editRun')}" method="post" class="form-horizontal">
+										<div class="form-group">
+											<label class="col-sm-3 control-label">用户昵称</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="hidden" name="id" value="{$user['id']}">
+														<p class="form-control-static">{:empty($user['nickname']) ? '未知' : $user['nickname']}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">电子邮箱</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<p class="form-control-static">{:empty($user['user_email']) ? '未知' : $user['user_email']}</p>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">用户状态</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-12 info-radio">
+														<label >
+															<input type="radio" value="0" name="user_status" <if condition="$user['user_status'] eq 0">checked="checked"</if> />冻结
+														</label>
+														<label >
+															<input type="radio" value="1" name="user_status" <if condition="$user['user_status'] eq 1">checked="checked"</if>/>正常
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">用户类型</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-12 info-radio">
+															<label >
+																<input type="radio" value="0" name="user_type" <if condition="$user['user_type'] eq 0">checked="checked"</if> />管理员
+															</label>
+															<label >
+																<input type="radio" value="1" name="user_type" <if condition="$user['user_type'] eq 1">checked="checked"</if>/>普通用户
+															</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">性别</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-12 info-radio">
+														<label >
+															<input type="radio" value="0" name="sex" <if condition="$user['sex'] eq 0">checked="checked"</if>/>保密
+														</label>
+														<label >
+															<input type="radio" value="1" name="sex" <if condition="$user['sex'] eq 1">checked="checked"</if>/>男
+														</label>
+														<label >
+															<input type="radio" value="2" name="sex"  <if condition="$user['sex'] eq 2">checked="checked"</if>"/>女
+														</label>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">所在国家</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="country" required value="{$user['country']}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">所在省</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="province" required value="{$user['province']}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">所在城市</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="city" required value="{$user['city']}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">详细地址</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="address" required value="{$user['address']}" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+
+										<hr/>
+										<div class="form-group">
+											<div class="col-sm-6 col-sm-offset-3">
+												<button type="submit" class="btn btn-green">确认编辑</button>
+											</div>
+										</div>
+									</form>
+	
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+	                	<!--END CONTENT-->
+
+
+	                	<!--BEGIN FOOTER-->
+			<include file="Common/footer"/>
+	               	<!--END FOOTER-->
+        </div>
+        <!--END PAGE WRAPPER-->
+	</div>
+</div>
+
+
+	<script>
+		$(function(){
+			$('#side-menu>li').removeClass('active');
+			$('#admin-user').addClass('active');
+		});
+	</script>
+
+</body>
+</html>
