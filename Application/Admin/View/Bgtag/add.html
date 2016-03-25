@@ -90,7 +90,7 @@
 													<div class="col-xs-6">
 														<select class="form-control" name="sort">
                                                             <for start="0" end="11">
-                                                            	<option value="{$i}">{$i}</option>
+                                                            	<option value="{$i}" <if condition="$i eq 10">selected="selected"</if>>{$i}</option>
 															</for>
                                                         </select>
 														<div class="text-red">数字越小越优先</div>

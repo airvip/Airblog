@@ -5,6 +5,16 @@
 #user-edit-information div.controls div.info-radio{
   padding-top: 5px;
 }
+#user-edit-information div.controls div.info-checkbox{
+  padding-top: 5px;
+}
+#user-edit-information div.controls div.info-checkbox>label{
+  border:1px solid #CCC;
+  padding:3px 6px;
+  margin-right: 10px;
+}
+
+
 .table-input-order{
   width:40px;
   box-shadow: none !important;

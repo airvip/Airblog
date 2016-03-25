@@ -79,8 +79,10 @@
 											<tr>
 												<th>#</th>
 												<th>标签名称</th>
-												<th>使用次数</th>
+												<th>标签说明</th>
 												<th>排序</th>
+												<th>创建时间</th>
+												<th>状态</th>
 												<th>操作</th>
 											</tr>
 										</thead>
@@ -89,19 +91,19 @@
 											<volist name="list" id="vo">
 												<tr>
 													<td attr="{$vo['id']}">{$key+1}</td>
+													<td>{:empty($vo['name']) ? '空值' : $vo['name']}</td>
+													<td>{:empty($vo['info']) ? '空值' : $vo['info']}</td>
 													<td>
-														{$vo.ta_name}
+														<input type="text"  class=" table-input-order tag-order" attr="{$vo['id']}" value="{$vo['sort']}">
 													</td>
-													<td>{$vo.ta_num}</td>
-													<td>
-														<input type="text"  class=" table-input-order tag-order" attr="{$vo['ta_id']}" value="{$vo['ta_order']}">
-													</td>
+													<td>{:empty($vo['create_time']) ? '空值' : date('Y-m-d H:i:s',$vo['create_time'])}</td>
+													<td>{:empty($vo['status']) ? '不显示' : '显示'}</td>
 													<td id="user-fa">
-														<a class="btn btn-warning btn-xs" href="{:U('Bgtag/edit',array('ta_id'=>$vo[ta_id]))}">
+														<a class="btn btn-warning btn-xs" href="{:U('Admin/Bgtag/edit',array('id'=>$vo['id']))}">
 															<i class="fa fa-pencil-square-o" title="编辑"></i>
 														</a> 
-														<a class="btn btn-danger btn-xs" href="{:U('Bgtag/delete',array('ta_id'=>$vo[ta_id]))}">
-															<i class="fa fa-trash-o" attr="{$vo[ta_id]}" title="删除"></i>
+														<a class="btn btn-danger btn-xs">
+															<i class="fa fa-trash-o" attr="{$vo['id']}" title="删除"></i>
 														</a> 
 													</td>
 												</tr>
@@ -136,45 +138,58 @@
 			$('#side-menu>li').removeClass('active');
 			$('#admin-blog').addClass('active');
 
-
-
-		});
-
-		
-		
-		
-		$('.tag-order').blur(function(){
-			var id=$(this).attr('attr');
-			var ta_order=parseInt($(this).val());
-			
-			if(ta_order>=0 && ta_order<=10){
+			//排序修改
+			$('.tag-order').blur(function(){
+				var id		= $(this).attr('attr');
+				var sort	= parseInt($(this).val());
+				if(!(sort >= 0 && sort <= 10)){
+					alert('排序值必须在0-10之间');
+					$(this).focus();
+					return;
+				}
+				//发送ajax请求
 				$.ajax({
 					type:'post',
-					url:"{:U('Bgtag/order')}",
-	//				data:'u_state='+id,
+					url:"{:U('Admin/Bgtag/order')}",
+					//data:'u_state='+id,
 					data:{
-						'ta_id':id,
-						'ta_order':ta_order,
+						'id':id,
+						'sort':sort,
 					},
 					dataType:"json",
 					success:function(data){
 						if(data.code){
-							alert(data.mess);
-							self.location='{:U("Bgtag/index")}';
-							return;
+							location.reload();return;
 						}else{
-							alert(data.mess);
-							return;
+							alert(data.mess);return;
 						}
 					},
 				});
-			}else{
-				alert('排序值必须在0-10之间');return;
-			}
+			});
+
+			//删除
+			$(".item-delete").click(function(){
+				var rs		    = confirm('你确定删除该记录吗?');
+				var id 	= $(this).attr('attr');
+				//console.log(rs);
+				if( false == rs)return;
+				$.ajax({
+					type:'post',
+					url:'{:U("Admin/Bgtag/delete")}',
+					data:{
+						'id':id,
+					},
+					dataType:"json",
+					success:function(data){
+						if(1 == data.code){
+							alert(data.mess);location.reload();return;
+						}else{
+							alert(data.mess);return;
+						}
+					},
+				});
+			});
 		});
-		
-		
-		
 	</script>
 
 </body>

@@ -17,14 +17,8 @@
 			<div class="page-title-breadcrumb option-demo">
 				<div class="page-header pull-right">
 					<div class="page-toolbar">
-						<a href="{:U('Admin/Blog/add')}" type="button" title="新增博客" class="btn btn-blue" >
-							<i class="fa fa-plus-square"></i>
-						</a>
-						<a type="button" href="{:U('Admin/Blog/index')}" title="" class="btn btn-blue" >
+						<a type="button" href="{:U('Admin/Blog/index')}" title="" class="btn btn-success" >
 							博客管理
-						</a>&nbsp;
-						<a href="{:U('Admin/Bgtag/add')}" type="button" title="新增博客标签" class="btn btn-success" >
-							<i class="fa fa-plus-square"></i>
 						</a>
 						<a type="button" href="{:U('Admin/Bgtag/index')}" title="" class="btn btn-success" >
 							博客标签管理
@@ -33,7 +27,7 @@
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">					
 					<li>
-						<a href="{:U('Blog/index')}">博客管理</a>/
+						<a href="{:U('Admin/Blog/index')}">博客管理</a>/
 					</li>
 					<li>博客列表 </li>
 				</ol>
@@ -69,6 +63,13 @@
 													</div>
 												</div>
 											</form>
+										</div>
+										<div class="col-xs-7">
+											<div class="navbar-form text-right">
+												<a href="{:U('Admin/Blog/add')}" type="button" title="新增博客" class="btn btn-success" >
+													<i class="fa fa-plus-square"></i> 新增博客
+												</a>
+											</div>
 										</div>
 									</div>
 								</div>

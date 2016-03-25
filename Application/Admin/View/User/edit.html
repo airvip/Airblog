@@ -47,13 +47,12 @@
 							<div class="portlet box">
 								<div class="portlet-body" id="user-edit-information">
 									<h3>基本信息</h3><hr>
-									<form action="{:U('User/editRun')}" method="post" class="form-horizontal">
+									<form action="{:U('Admin/User/edit_run')}" method="post" class="form-horizontal">
 										<div class="form-group">
 											<label class="col-sm-3 control-label">用户昵称</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="hidden" name="id" value="{$user['id']}">
 														<p class="form-control-static">{:empty($user['nickname']) ? '未知' : $user['nickname']}</p>
 													</div>
 												</div>
@@ -161,6 +160,7 @@
 										<hr/>
 										<div class="form-group">
 											<div class="col-sm-6 col-sm-offset-3">
+												<input type="hidden" name="id" value="{$user['id']}">
 												<button type="submit" class="btn btn-green">确认编辑</button>
 											</div>
 										</div>

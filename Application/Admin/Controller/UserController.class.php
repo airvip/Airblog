@@ -56,6 +56,28 @@ class UserController extends CommonController {
         $this->assign('user',$user);
         $this->display();
     }
+    //编辑处理
+    public function edit_run(){
+        if(!IS_POST)$this->error('非法操作');
+        $temp   = I('post.');
+        $data_user  = array(
+            'user_status'   => $temp['user_status'],
+            'user_type'     => $temp['user_type'],
+            'id'             => $temp['id']
+        );
+        $map_user   = $this->user->save($data_user);
+        $data_user_info = array(
+            'sex'            => $temp['sex'],
+            'country'        => $temp['country'],
+            'province'       => $temp['province'],
+            'city'            => $temp['city'],
+            'address'         => $temp['address'],
+        );
+        $map_user_info  = array('user_id'=>$temp['id']);
+        $rs_user_info   = M('User_info')->where($map_user_info)->save($data_user_info);
+        if(false === $map_user && false === $rs_user_info)$this->error('更新失败');
+        $this->success('更新成功');
+    }
 
     //删除用户（假删除user_status=2）
     public function delete(){
@@ -65,8 +87,8 @@ class UserController extends CommonController {
             'id'            => $temp['user_id'],
             'user_status' => 2
         );
-        $rs=$this->user->save($data);
-        if(!$rs)ajax_return(0,'','删除用户失败');
+        $rs = $this->user->save($data);
+        if(false === $rs)ajax_return(0,'','删除用户失败');
         ajax_return(1,'','删除用户成功');
     }
 
@@ -92,8 +114,8 @@ class UserController extends CommonController {
             'id'               => $temp['id'],
             'user_status'     => $temp['user_status']
         );
-        $rs=$this->user->save($data);
-        if(!$rs)ajax_return(0,'','修改失败');
+        $rs = $this->user->save($data);
+        if(false === $rs)ajax_return(0,'','修改失败');
         ajax_return(1,'','修改成功');
     }
 
@@ -103,10 +125,10 @@ class UserController extends CommonController {
         $temp   = I('post.');
         $data   = array(
             'id'            => $temp['user_id'],
-            'user_pass'    => 123456
+            'user_pass'    => md5(123456)
         );
-        $rs=$this->user->save($data);
-        if(!$rs)ajax_return(0,'','初始化失败或原值为123456');
+        $rs = $this->user->save($data);
+        if(false === $rs)ajax_return(0,'','初始化失败');
         ajax_return(1,'','初始化成功');
     }
 
