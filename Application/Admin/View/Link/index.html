@@ -17,15 +17,18 @@
 			<div class="page-title-breadcrumb option-demo">
 				<div class="page-header pull-right">
 					<div class="page-toolbar">
-						<a href="{:U('Link/add')}" type="button" title="新增友情链接" class="btn btn-blue" >
-							<i class="fa fa-plus-square"></i>
+
+						<!--<a type="button" href="{:U('User/index',array('user_type'=>1))}" title="" class="btn btn-success" >
+							会员管理
 						</a>
-						
+						<a type="button" href="{:U('User/index',array('user_type'=>0))}" title="" class="btn btn-success" >
+							管理员管理
+						</a>-->
 					</div>
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">					
 					<li>
-						<a href="{:U('Link/index')}">友情链接</a>/
+						<a href="{:U('Admin/Link/index')}">友情链接</a>/
 					</li>
 					<li>友情链接列表 </li>
 				</ol>
@@ -43,16 +46,33 @@
 						<div class="col-lg-12">
 							<div class="portlet box">
 								<div class="panel-heading">
-								
-									<form class="navbar-form navbar-right" action="{:U('Link/search')}" method="post" role="search" >
-                                        <div class="form-group">
-                                        	<input type="text" name="lk_name" class="form-control" placeholder="请输入网站名称">
+
+									<div class="row">
+										<div class="col-xs-5">
+											<form class="navbar-form " action="{:U('Admin/Link/search')}" method="post" role="search" >
+												<div class="input-group">
+													<div class="input-group-btn">
+														<select class="form-control btn" name="name">
+															<option value="name">连接名称</option>
+															<option value="link_url">连接地址</option>
+
+														</select>
+													</div>
+													<input type="text" name="search" class="form-control" placeholder="Search for you!">
+													<div class="input-group-btn">
+														<button type="submit" class="btn btn-green"><i class="fa fa-search"></i></button>
+													</div>
+												</div>
+											</form>
 										</div>
-                                        <button class="btn btn-green" type="submit">
-											<i class="fa fa-search"></i>
-										</button>
-                                    </form>
-									<div class="clearfix"></div>
+										<div class="col-xs-7">
+											<div class="navbar-form text-right">
+												<a href="{:U('Admin/Link/add')}" type="button" title="新增连接" class="btn btn-success" >
+													<i class="fa fa-plus-square"></i> 新增连接
+												</a>
+											</div>
+										</div>
+									</div>
 								
 								</div>
 								<div class="portlet-body">
@@ -75,35 +95,30 @@
 										</thead>
 										<tbody>
 											
-											<volist name="list" id="vo" empty="暂时没有数据">
+											<volist name="list" id="vo" >
 												<tr>
-													<td>{$vo.lk_id}</td>
-													<td>{$vo.lk_name}</td>
+													<td attr="{$vo['id']}">{$key+1}</td>
+													<td>{$vo['name']}</td>
 													<td>
-														<div class="content-hidden" title="{$vo.lk_url}">
-															{$vo.lk_url}
+														<div class="content-hidden" title="{$vo['link_url']}">
+															{$vo['link_url']}
 														</div>
 													</td>
 													<td>
-														<if condition="$vo[lk_show] eq 0">
-															不显示
-														<else/>
-															显示
-														</if>
+														{:$vo['status'] == 1 ? '显示':'不显示'}
 													</td>
 													<td>
-														<input type="text"  class="form-control len-50 link-order" attr="{$vo['lk_id']}" value="{$vo['lk_order']}">
+														<input type="text"  class=" table-input-order tag-order" attr="{$vo['id']}" value="{$vo['sort']}">
 													</td>
 													<td>
-														{$vo['lk_time']||date='Y-m-d H:i',###}
+														{:date('Y-m-d H:i:s',$vo['create_time'])}
 													</td>
 													<td id="user-fa">
-														
-														<a class="btn btn-warning" href="{:U('Link/edit',array('lk_id'=>$vo[lk_id]))}">
+														<a class="btn btn-warning btn-xs" href="{:U('Admin/Link/edit',array('id'=>$vo['id']))}">
 															<i class="fa fa-pencil-square-o" title="编辑"></i>
 														</a> 
-														<a class="btn btn-danger" href="{:U('Link/delete',array('lk_id'=>$vo[lk_id]))}">
-															<i class="fa fa-trash-o" attr="{$vo[lk_id]}" title="删除"></i>
+														<a class="btn btn-danger btn-xs">
+															<i class="fa fa-trash-o item-delete" attr="{$vo['id']}" title="删除"></i>
 														</a> 
 													</td>
 												</tr>
@@ -134,8 +149,43 @@
 
 	
 	<script>
-		$('#side-menu>li').removeClass('active');
-		$('#admin-link').addClass('active');
+		$(function(){
+			$('#side-menu>li').removeClass('active');
+			$('#admin-link').addClass('active');
+
+
+
+
+
+
+
+
+
+
+			//删除
+			$(".item-delete").click(function(){
+				var rs		    = confirm('你确定删除该记录吗?');
+				var id 	= $(this).attr('attr');
+				//console.log(rs);
+				if( false == rs)return;
+				$.ajax({
+					type:'post',
+					url:'{:U("Admin/Link/delete")}',
+					data:{
+						'id':id,
+					},
+					dataType:"json",
+					success:function(data){
+						if(1 == data.code){
+							alert(data.mess);location.reload();return;
+						}else{
+							alert(data.mess);return;
+						}
+					},
+				});
+			});
+		});
+
 		
 		
 		$('.link-order').blur(function(){
@@ -155,7 +205,7 @@
 					success:function(data){
 						if(data.code){
 							alert(data.mess);
-							self.location='{:U("Link/index")}';
+							self.location='{:U("Admin/Link/index")}';
 							return;
 						}else{
 							alert(data.mess);

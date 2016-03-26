@@ -18,18 +18,18 @@
 				<div class="page-header pull-right">
 					<div class="page-toolbar">
 						<a type="button" href="{:U('Admin/Blog/index')}" title="" class="btn btn-success" >
-							博客管理
+							单页管理
 						</a>
 						<a type="button" href="{:U('Admin/Bgtag/index')}" title="" class="btn btn-success" >
-							博客标签管理
+							轮播器
 						</a>
 					</div>
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">					
 					<li>
-						<a href="{:U('Admin/Bgtag/index')}">博客标签管理</a>/
+						<a href="{:U('Admin/Bgtag/index')}">单页管理</a>/
 					</li>
-					<li>博客标签列表 </li>
+					<li>轮播器 </li>
 				</ol>
 				<div class="clearfix">
 				</div>
@@ -136,7 +136,7 @@
 	<script>
 		$(function(){
 			$('#side-menu>li').removeClass('active');
-			$('#admin-blog').addClass('active');
+			$('#admin-page').addClass('active');
 
 			//排序修改
 			$('.tag-order').blur(function(){

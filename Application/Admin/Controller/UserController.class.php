@@ -81,7 +81,7 @@ class UserController extends CommonController {
 
     //删除用户（假删除user_status=2）
     public function delete(){
-        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        if(!IS_AJAX) $this->error('非法操作');
         $temp   = I('post.');
         $data   = array(
             'id'            => $temp['user_id'],
@@ -108,7 +108,7 @@ class UserController extends CommonController {
 
     //ajax修改用户状态
     public function free(){
-        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        if(!IS_AJAX) $this->error('非法操作');
         $temp   = I('post.');
         $data   = array(
             'id'               => $temp['id'],
@@ -121,7 +121,7 @@ class UserController extends CommonController {
 
     //初始化用户密码
     public function user_pass(){
-        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        if(!IS_AJAX) $this->error('非法操作');
         $temp   = I('post.');
         $data   = array(
             'id'            => $temp['user_id'],

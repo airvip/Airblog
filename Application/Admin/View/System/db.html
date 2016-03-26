@@ -32,7 +32,7 @@
 					<li>
 						<a href="{:U('Admin/System/index')}">系统管理</a>/
 					</li>
-					<li>基础配置 </li>
+					<li>数据库配置 </li>
 				</ol>
 				<div class="clearfix">
 				</div>
@@ -49,92 +49,51 @@
 							<div class="portlet box">
 								
 								<div class="portlet-body">
-									<form action="{:U('Admin/System/index_run')}" method="post" class="form-horizontal">
-										<h3>网站配置</h3><hr>
+									<form action="{:U('Admin/System/db_run')}" method="post" class="form-horizontal">
+										<h3>数据库配置</h3><hr>
 										<div class="form-group">
-											<label class="col-sm-3 control-label">网站名称</label>
+											<label class="col-sm-3 control-label">主机地址</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="text" name="web_name" required value="{$item['WEB_NAME']}" class="form-control"/>
+														<input type="text" name="db_host" required value="{$item['DB_HOST']}" class="form-control"/>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-3 control-label">网站根目录</label>
+											<label class="col-sm-3 control-label">数据库名</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="text" name="web_url"  value="{$item['WEB_URL']}" class="form-control"/>
-														<div class="text-red">如果是根目录，请不要填写</div>
+														<input type="text" name="db_name"  value="{$item['DB_NAME']}" class="form-control"/>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="form-group"><label class="col-sm-3 control-label">版权信息</label>
+										<div class="form-group"><label class="col-sm-3 control-label">连接用户</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="text" name="copy" required value="{$item['COPY']}" class="form-control"/>
+														<input type="text" name="db_user" required value="{$item['DB_USER']}" class="form-control"/>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">是否开启注册</label>
+										<div class="form-group"><label class="col-sm-3 control-label">连接密码</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
-													<div class="col-xs-6 line-34">
-														<label >
-															<input type="radio" value="0" name="regis_on" <if condition="$item['REGIS_ON'] eq 0">checked="checked"</if> /> 不允许注册
-														</label>
-														<label >
-															<input type="radio" value="1" name="regis_on" <if condition="$item['REGIS_ON'] eq 1">checked="checked"</if>/> 允许注册
-														</label>
+													<div class="col-xs-6">
+														<input type="password" name="db_pwd" required value="{$item['DB_PWD']}" class="form-control"/>
 													</div>
 												</div>
 											</div>
 										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">后台每页数量</label>
+										<div class="form-group"><label class="col-sm-3 control-label">端口号</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
-													<div class="col-xs-6 line-34">
-														<label >
-															<input type="radio" value="10" name="admin_page" <if condition="$item['ADMIN_PAGE'] eq 10">checked="checked"</if>/>
-															10
-														</label>
-														<label >
-															<input type="radio" value="15" name="admin_page" <if condition="$item['ADMIN_PAGE'] eq 15">checked="checked"</if>/>
-															15
-														</label>
-														<label >
-															<input type="radio" value="20" name="admin_page" <if condition="$item['ADMIN_PAGE'] eq 20">checked="checked"</if>/>
-															20
-														</label>
-													</div>
-												</div>
-											</div>
-										</div>
-										
-
-										<h3>SEO优化</h3><hr/>
-										<div class="form-group"><label class="col-sm-3 control-label">关键词</label>
-											<div class="col-sm-9 controls">
-												<div class="row">
-													<div class="col-xs-9">
-														<input type="text" name="key_word" required value="{$item['KEY_WORD']}" class="form-control"/>
-													</div>
-												</div>
-											</div>
-										</div>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">内容描述</label>
-											<div class="col-sm-9 controls">
-												<div class="row">
-													<div class="col-xs-9">
-														<textarea class="form-control" name="description" required rows="3">{$item['DESCRIPTION']}</textarea>
+													<div class="col-xs-6">
+														<input type="text" name="db_port" required value="{$item['DB_PORT']}" class="form-control"/>
 													</div>
 												</div>
 											</div>

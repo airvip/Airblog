@@ -10,7 +10,7 @@ class BgtagController extends CommonController {
 
     //显示列表
     public function index(){
-        $map    = array('status'=>array('lt',2));
+        $map    = array('status'=>array('neq',2));
         $order  = 'sort ASC,create_time DESC';
         $list   = $this->page($this->tag,C('ADMIN_PAGE'),$map,$order);
         if(false === $list)$this->error('系统出现了不可预知的问题...');
@@ -42,7 +42,7 @@ class BgtagController extends CommonController {
         if(!IS_GET)$this->error('非法操作');
         $temp   = I('id');
         $map    = array('id' => $temp);
-        $field  = 'id,name,sort,info';
+        $field  = 'id,name,sort,info,status';
         $item   = $this->tag
             -> field($field)
             -> where($map)
@@ -71,7 +71,7 @@ class BgtagController extends CommonController {
 
     //删除（假删除status=2）
     public function delete(){
-        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        if(!IS_AJAX) $this->error('非法操作');
         $temp   = I('post.');
         $data   = array(
             'id'            => $temp['id'],
@@ -98,7 +98,7 @@ class BgtagController extends CommonController {
 
     //修改排序
     public function order(){
-        if(!IS_AJAX) ajax_return(0,'','非法操作');
+        if(!IS_AJAX)$this->error('非法操作');
         $temp   = I('post.');
         $data   = array(
             'id'     => $temp['id'],

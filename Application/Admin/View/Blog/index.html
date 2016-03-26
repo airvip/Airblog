@@ -45,6 +45,7 @@
 						<div class="col-lg-12">
 							<div class="portlet box">
 								<div class="panel-heading">
+
 									<div class="row">
 										<div class="col-xs-5">
 											<form class="navbar-form " action="{:U('Admin/Blog/search')}" method="post" role="search" >
@@ -72,16 +73,16 @@
 											</div>
 										</div>
 									</div>
+
 								</div>
 								<div class="portlet-body">
 									<table class="table table-hover table-striped user-table">
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>缩略图</th>
 												<th>博客标题</th>
 												<th>博客作者</th>
-												<th>博客标签</th>
+												<th>博客简介</th>
 												<th>浏览数量</th>
 												<th>发布时间</th>
 												<th>操作</th>
@@ -93,40 +94,34 @@
 												<tr>
 													<td attr="{$vo['id']}">{$key+1}</td>
 													<td>
-														<if condition="$vo['b_img']">
-															<img class="img-responsive " width="30" src="{$vo.b_img}">
-														<else/>
-															<img class="img-responsive " width="30" src="__PUBLIC__/images/blogs/default_blog.jpg">
-														</if>
-													</td>
-													<td>
-														<div class="content-hidden" title="{$vo.b_title}">
-															{$vo.b_title}
-														</div>
-													<td>
-														{$vo.b_auther}
-													</td>
-													<td>
-														<div class="content-hidden" title="{$vo.b_tag}">
-															{$vo.b_tag}
+														<div class="content-hidden" title="{$vo['title']}">
+															{$vo['title']}
 														</div>
 													</td>
 													<td>
-														{$vo.b_view}
+														{$vo['auther']}
 													</td>
 													<td>
-														{$vo.b_time|date="Y-m-d H:i",###}
+														<div class="content-hidden" title="{$vo['blog_info']}">
+															{$vo['blog_info']}
+														</div>
+													</td>
+													<td>
+														{$vo['view_count']}
+													</td>
+													<td>
+														{:date('Y-m-d H:i:s',$vo['create_time'])}
 													</td>
 													<td id="user-fa">
-														<a class="btn btn-primary" href="{:U('Blog/see',array('b_id'=>$vo[b_id]))}">
+														<a class="btn btn-primary btn-xs" href="{:U('Admin/Blog/see',array('id'=>$vo['id']))}">
 															<i class="fa  fa-eye" title="查看详情"></i>
 														</a> 
 														 
-														<a class="btn btn-warning" href="{:U('Blog/edit',array('b_id'=>$vo[b_id]))}">
+														<a class="btn btn-warning btn-xs" href="{:U('Admin/Blog/edit',array('id'=>$vo['id']))}">
 															<i class="fa fa-pencil-square-o" title="编辑"></i>
 														</a> 
-														<a class="btn btn-danger" href="{:U('Blog/delete',array('b_id'=>$vo[b_id]))}">
-															<i class="fa fa-trash-o" attr="{$vo[b_id]}" title="删除"></i>
+														<a class="btn btn-danger btn-xs">
+															<i class="fa fa-trash-o item-delete" attr="{$vo['id']}" title="删除"></i>
 														</a> 
 													</td>
 												</tr>
@@ -163,7 +158,27 @@
 			$('#side-menu>li').removeClass('active');
 			$('#admin-blog').addClass('active');
 
-
+			//删除
+			$(".item-delete").click(function(){
+				var rs		    = confirm('你确定删除该条记录吗?');
+				var id 	= $(this).attr('attr');
+				if( false == rs)return;
+				$.ajax({
+					type:'post',
+					url:'{:U("Admin/Blog/delete")}',
+					data:{
+						'id':id,
+					},
+					dataType:"json",
+					success:function(data){
+						if(1 == data.code){
+							alert(data.mess);location.reload();return;
+						}else{
+							alert(data.mess);return;
+						}
+					},
+				});
+			});
 
 		});
 	</script>

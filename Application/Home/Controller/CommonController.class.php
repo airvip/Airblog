@@ -12,7 +12,7 @@ class CommonController extends Controller {
     public function index(){
         $this->display();
     }
-    //Í¼Æ¬ÉÏ´«·½·¨
+    //å›¾ç‰‡ä¸Šä¼ æ–¹æ³•
     protected function upload($Files,$path='Avatar',$type=array('jpg','png','jpeg')){
         $upload = new \Think\Upload();                              // upload class
         $upload->maxSize   = 2097152;                               // file size 8M is 8388608 ,default(2m)
@@ -28,7 +28,7 @@ class CommonController extends Controller {
         }
         return $info;
     }
-    //Éú³ÉËõÂÔÍ¼µÄ·½·¨
+    //ç”Ÿæˆç¼©ç•¥å›¾çš„æ–¹æ³•
     protected function thumb($data,$scale_width = '500',$scale_height = '500'){
         $source = './Uploads/'.$data['savepath'].$data['savename'];
         $thumb = './Uploads/'.$data['savepath'].'thumb_'.$data['savename'];
@@ -53,15 +53,15 @@ class CommonController extends Controller {
 
 
     /**
-     * @param $obj ·ÖÒ³·½·¨
+     * @param $obj åˆ†é¡µæ–¹æ³•
      * @return mixed
      */
     protected function page($obj, $size =25, $where = '', $order = '', $field = true, $join = '')
     {
         $count = $obj->where($where)->join($join)->count();
         $Page = new \Think\Page($count, $size);
-        //$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% È« %TOTAL_ROW% ¼ş');
-        $Page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%  È« %TOTAL_ROW% ¼ş');
+        //$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% å…¨ %TOTAL_ROW% ä»¶');
+        $Page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%  å…¨ %TOTAL_ROW% ä»¶');
         $show = $Page->show();
         $list = $obj->field($field)->where($where)->order($order)->join($join)->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('page', $show);
@@ -69,24 +69,24 @@ class CommonController extends Controller {
         return $list;
     }
 
-    //ÀûÓÃphpmail·¢ËÍÓÊ¼ş
+    //åˆ©ç”¨phpmailå‘é€é‚®ä»¶
     protected function send_mail($to, $title, $content) {
         Vendor('PHPMailer.PHPMailerAutoload');
-        $mail           = new \PHPMailer();         //ÊµÀı»¯
-        $mail->IsSMTP(); // ÆôÓÃSMTP
-        $mail->Host     = C('MAIL_HOST');       //smtp·şÎñÆ÷µÄÃû³Æ£¨ÕâÀïÒÔQQÓÊÏäÎªÀı£©
-        $mail->SMTPAuth = C('MAIL_SMTPAUTH');   //ÆôÓÃsmtpÈÏÖ¤
-        $mail->Username = C('MAIL_USERNAME'); //ÄãµÄÓÊÏäÃû
-        $mail->Password = C('MAIL_PASSWORD') ; //ÓÊÏäÃÜÂë
-        $mail->From     = C('MAIL_FROM'); //·¢¼şÈËµØÖ·£¨Ò²¾ÍÊÇÄãµÄÓÊÏäµØÖ·£©
-        $mail->FromName = C('MAIL_FROMNAME'); //·¢¼şÈËĞÕÃû
+        $mail           = new \PHPMailer();         //å®ä¾‹åŒ–
+        $mail->IsSMTP(); // å¯ç”¨SMTP
+        $mail->Host     = C('MAIL_HOST');       //smtpæœåŠ¡å™¨çš„åç§°ï¼ˆè¿™é‡Œä»¥QQé‚®ç®±ä¸ºä¾‹ï¼‰
+        $mail->SMTPAuth = C('MAIL_SMTPAUTH');   //å¯ç”¨smtpè®¤è¯
+        $mail->Username = C('MAIL_USERNAME'); //ä½ çš„é‚®ç®±å
+        $mail->Password = C('MAIL_PASSWORD') ; //é‚®ç®±å¯†ç 
+        $mail->From     = C('MAIL_FROM'); //å‘ä»¶äººåœ°å€ï¼ˆä¹Ÿå°±æ˜¯ä½ çš„é‚®ç®±åœ°å€ï¼‰
+        $mail->FromName = C('MAIL_FROMNAME'); //å‘ä»¶äººå§“å
         $mail->AddAddress($to,C('MAIL_FROMNAME'));
-        $mail->WordWrap = 50; //ÉèÖÃÃ¿ĞĞ×Ö·û³¤¶È
-        $mail->IsHTML(C('MAIL_ISHTML')); // ÊÇ·ñHTML¸ñÊ½ÓÊ¼ş
-        $mail->CharSet  = C('MAIL_CHARSET'); //ÉèÖÃÓÊ¼ş±àÂë
-        $mail->Subject  = $title; //ÓÊ¼şÖ÷Ìâ
-        $mail->Body     = $content; //ÓÊ¼şÄÚÈİ
-        $mail->AltBody  = "ÕâÊÇÒ»·âÀ´×ÔAirblogµÄÎ¿ÎÊÓÊ¼ş"; //Message body does not support HTML standby display.
+        $mail->WordWrap = 50; //è®¾ç½®æ¯è¡Œå­—ç¬¦é•¿åº¦
+        $mail->IsHTML(C('MAIL_ISHTML')); // æ˜¯å¦HTMLæ ¼å¼é‚®ä»¶
+        $mail->CharSet  = C('MAIL_CHARSET'); //è®¾ç½®é‚®ä»¶ç¼–ç 
+        $mail->Subject  = $title; //é‚®ä»¶ä¸»é¢˜
+        $mail->Body     = $content; //é‚®ä»¶å†…å®¹
+        $mail->AltBody  = "è¿™æ˜¯ä¸€å°æ¥è‡ªAirblogçš„æ…°é—®é‚®ä»¶"; //Message body does not support HTML standby display.
         return($mail->Send());
     }
 

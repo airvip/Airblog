@@ -1,3 +1,9 @@
+.user-table div.content-hidden{
+  overflow: hidden;
+  width: 200px;
+  word-break: keep-all;
+  white-space:nowrap;
+}
 #use-show-information tr>td:nth-child(1){
   text-align: right !important;
   width: 35%;
