@@ -7,11 +7,37 @@ class CommonController extends Controller {
        /* if(!isset($_SESSION['user']['id'])){
             $this->redirect('Home/Public/login');
         }*/
+        $this->link();
+        $this->hot_blog();
+        $this->cloud_tag();
     }
 
-    public function index(){
-        $this->display();
+    //底部友情连接
+    private function link(){
+        $field      = 'name,link_url';
+        $map        = array('status'=>array('eq',1));
+        $list       = M('Link')->field($field)->where($map)->select();
+        $this->assign('list_link',$list);
     }
+
+    //侧栏云标签
+    private function cloud_tag(){
+        $field  = 'id,name';
+        $map    = array('status'=>array('eq',1));
+        $order  = 'sort ASC,create_time DESC';
+        $list   = M('Tag')->field($field)->where($map)->order($order)->limit(20)->select();
+        $this->assign('list_tag',$list);
+    }
+
+    //侧栏热门博客
+    private function hot_blog(){
+        $field  = 'id,title,thumb,create_time';
+        $map    = array( 'status'   => array('eq',1));
+        $order  = 'view_count DESC';
+        $list   = M('Blog')->field($field)->where($map)->order($order)->limit(10)->select();
+        $this->assign('list_bar',$list);
+    }
+
     //图片上传方法
     protected function upload($Files,$path='Avatar',$type=array('jpg','png','jpeg')){
         $upload = new \Think\Upload();                              // upload class
@@ -61,7 +87,7 @@ class CommonController extends Controller {
         $count = $obj->where($where)->join($join)->count();
         $Page = new \Think\Page($count, $size);
         //$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% 全 %TOTAL_ROW% 件');
-        $Page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%  全 %TOTAL_ROW% 件');
+        $Page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%');
         $show = $Page->show();
         $list = $obj->field($field)->where($where)->order($order)->join($join)->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('page', $show);

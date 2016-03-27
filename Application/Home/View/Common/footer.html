@@ -1,8 +1,12 @@
 	<!--footer Start-->
 	<footer id="footer" class="text-muted">
 		<div class="container">
-			<p>企业培训 | 合作事宜 | 版权投诉</p>
-			<p>陕ICP备12345678. © 2009-2016 AirBlog官方平台. Powered by Bootstrap & Thinkphp.</p>
+			<p>
+				<volist name="list_link" id="vo">
+					<if condition="$key neq 0">|</if><a href="{$vo['link_url']}">{$vo['name']}</a>
+				</volist>
+			</p>
+			<p>{:C('COPY')} Powered by Bootstrap & Thinkphp.</p>
 		</div>
 	</footer>
 	

@@ -1,0 +1,43 @@
+<blockquote>
+	<h2>热门BG</h2>
+</blockquote>
+<div class="container-fluid">
+	<volist name="list_bar" id="vo">
+		<if condition="$key lt 3">
+			<a href="" class="">
+				<div class="row">
+					<div class="col-md-5" style="margin:12px 0;padding:0;">
+						<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
+							<img class="img-responsive img-thumbnail"  src="__ROOT__/{$vo['thumb']}">
+							<else/>
+							<img class="img-responsive img-thumbnail"  src="__PUBLIC__/img/no-pic.png">
+						</if>
+					</div>
+					<div class="col-md-7 " style="padding-right:0">
+						<h4>{$vo['title']}</h4>
+						<p>{:date('Y-m-d H:i:s',$vo['create_time'])}</p>
+					</div>
+				</div>
+			</a>
+		</if>
+	</volist>
+	<div class="row">
+		<ul class="list-unstyled list-title">
+			<volist name="list_bar" id="vo">
+				<if condition="$key gt 2">
+					<li>
+						<b>{$key+1}</b><a href="">{$vo['title']}</a>
+					</li>
+				</if>
+			</volist>
+		</ul>
+	</div>
+</div>
+<blockquote>
+	<h2>云TAG</h2>
+</blockquote>
+<div class="cloud-tags">
+	<volist name="list_tag" id="vo">
+		<a href="{:U('Home/Search/index',array('name'=>'tags','id'=>$vo['id']))}">{$vo['name']}</a>
+	</volist>
+</div>

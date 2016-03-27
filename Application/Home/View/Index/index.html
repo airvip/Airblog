@@ -1,131 +1,54 @@
-<include file="Home@Common/header" />
+<include file="Home@Common/header"/>
 </head>
 <body>
 	<include file="Home@Common/nav"/>
 
 
 
-	<div id="myCarousel" class="carousel slide">
-		
-		<ol class="carousel-indicators">
-			<li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			<li data-target="#myCarousel" data-slide-to="1"></li>
-			<li data-target="#myCarousel" data-slide-to="2"></li>
-		</ol>
-		<div class="carousel-inner" role="listbox">
-			<div class="item active" style="background: #f60;">
-				<img src="__PUBLIC__/img/1.png" alt="第一张">
-			</div>
-			<div class="item">
-				<img src="__PUBLIC__/img/2.png" alt="第一张">
-			</div>
-			<div class="item">
-				<img src="__PUBLIC__/img/3.png" alt="第一张">
-			</div>
-		</div>
-		<a class="left carousel-control" href="#myCarousel" role="button" data-slide="prev">
-			<span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
-			<span class="sr-only">Previous</span>
-		</a>
-		<a class="right carousel-control" href="#myCarousel" role="button" data-slide="next">
-			<span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
-			<span class="sr-only">Next</span>
-		</a>
-	</div>
-
-
-
-
-	<div class="tab1">
+	<div class="jumbotron">
 		<div class="container">
-			<h2 class="tab-h2">『Bootstrap 教程』</h2>
-			<p class="tab-p">Bootstrap 教程 Bootstrap,来自 Twitter,是目前最受欢迎的前端框架。</p>
-			<div class="row">
-				<div class="col-md-6 col">
-					<div class="media">
-						<div class="media-left media-middle">
-							<a href="#">
-								<img class="media-object" src="__PUBLIC__/img/tab1-1.png" alt="...">
-							</a>
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">课程内容</h4>
-							<p class="text-muted">其他：高校不知名的讲师编写，没有任何实战价值的教材！</p>
-							<p>其他：知名企业家、管理学大师联合编写的具有实现性教材！</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col">
-					<div class="media">
-						<div class="media-left media-middle">
-							<a href="#">
-								<img class="media-object" src="__PUBLIC__/img/tab1-2.png" alt="...">
-							</a>
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">课程内容</h4>
-							<p class="text-muted">其他：高校不知名的讲师编写，没有任何实战价值的教材！</p>
-							<p>其他：知名企业家、管理学大师联合编写的具有实现性教材！</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col">
-					<div class="media">
-						<div class="media-left media-middle">
-							<a href="#">
-								<img class="media-object" src="__PUBLIC__/img/tab1-3.png" alt="...">
-							</a>
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">课程内容</h4>
-							<p class="text-muted">其他：高校不知名的讲师编写，没有任何实战价值的教材！</p>
-							<p>其他：知名企业家、管理学大师联合编写的具有实现性教材！</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-md-6 col">
-					<div class="media">
-						<div class="media-left media-middle">
-							<a href="#">
-								<img class="media-object" src="__PUBLIC__/img/tab1-4.png" alt="...">
-							</a>
-						</div>
-						<div class="media-body">
-							<h4 class="media-heading">课程内容</h4>
-							<p class="text-muted">其他：高校不知名的讲师编写，没有任何实战价值的教材！</p>
-							<p>其他：知名企业家、管理学大师联合编写的具有实现性教材！</p>
-						</div>
-					</div>
-				</div>
-			</div>
+			<hgroup>
+				<h1>那些年走过的坑</h1>
+				<h4>Airblog是一款基于Bootstrap&Tp的免费博客系统...</h4>
+				<h5>
+					<a href="http://wpa.qq.com/msgrd?v=3&uin=980062449&site=qq&menu=yes" target="_blank" title="技术支持">
+						阿尔维奇
+						<span class="text-error" title="私人QQ">980062449</span>
+					</a>
+				</h5>
+			</hgroup>
 		</div>
 	</div>
 
 
-
-	<div class="tab2">
+	<div id="information">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-6 col-sm-6 tab2-img">
-					<img src="__PUBLIC__/img/tab2.png" alt="" class="auto img-responsive center-block">
+				<div class="col-md-8 info-left">
+					<div >
+						<volist name="list" id="vo">
+							<div class="row info-content">
+								<a href="{:U('Home/Blog/index',array('id'=>$vo['id']))}">
+									<div class="col-md-5 col-sm-5 col-xs-5">
+										<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
+											<img class="img-responsive img-thumbnail"  src="__ROOT__/{$vo['thumb']}">
+										<else/>
+											<img class="img-responsive img-thumbnail"  src="__PUBLIC__/img/no-pic.png">
+										</if>
+									</div>
+									<div class="col-md-7 col-sm-7 col-xs-7">
+										<h4>{$vo['title']}</h4>
+										<p class="hidden-xs">{$vo['blog_info']}</p>
+										<p>{$vo['auther']} {:$vo['create_time'] == $vo['edit_time'] ? '于'.date('Y-m-d H:i:s',$vo['create_time']).'发布' : '于'.date('Y-m-d H:i:s',$vo['edit_time'].'修改')}</p>
+									</div>
+								</a>
+							</div>
+						</volist>
+						{$page}
+					</div>
 				</div>
-				<div class="text col-md-6 col-sm-6 tab2-text">
-					<h3>强大的学习体系</h3>
-					<p>经过管理学大师层层把关、让您的企业突飞猛进。</p>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="tab3">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-6 col-sm-6">
-					<img src="__PUBLIC__/img/tab3.png" alt="" class="auto img-responsive center-block">
-				</div>
-				<div class="text col-md-6 col-sm-6">
-					<h3>完美的管理方式</h3>
-					<p>最新的管理培训方案，让您的企业赶超同行。</p>
+				<div class="col-md-4 info-right hidden-xs hidden-sm">
+					<include file="Home@Common/sidebar"/>
 				</div>
 			</div>
 		</div>
@@ -141,9 +64,9 @@
 
 
 	<include file="Home@Common/footer"/>
-	<script src="__PUBLIC__/js/"></script>
+	<script src=""></script>
 	<script>
-
+		
 	</script>
 </body>
 </html>
