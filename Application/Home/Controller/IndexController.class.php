@@ -11,6 +11,7 @@ class IndexController extends CommonController {
     public function index(){
         $map    = array( 'status'   => array('eq',1));
         $order  = 'recommend DESC,id DESC';
+        $field  = 'title,thumb,blog_info,create_time,edit_time,auther';
         $list   = $this->page($this->blog,C('ADMIN_PAGE'),$map,$order);
         if(false === $list)$this->error('系统出现了不可预知的问题...');
         $this->assign('list',$list);

@@ -21,114 +21,23 @@
 	<div id="case">
 		<div class="container">
 			<div class="row">
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case1.jpg" alt="">
-						<div class="caption">
-							<h4>中国移动通信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
+				<volist name="list" id="vo">
+					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
+						<div class="thumbnail">
+
+							<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
+								<img  src="__ROOT__/{$vo['thumb']}">
+							<else/>
+								<img  src="__PUBLIC__/img/no-pic.png">
+							</if>
+							<div class="caption">
+								<h4>{:empty($vo['name']) ? '保密内容' : $vo['name']}</h4>
+								<p>{:empty($vo['info']) ? '保密内容' : $vo['info']}</p>
+							</div>
 						</div>
 					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case2.jpg" alt="">
-						<div class="caption">
-							<h4>中国石化</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case3.jpg" alt="">
-						<div class="caption">
-							<h4>中国联通</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case4.jpg" alt="">
-						<div class="caption">
-							<h4>中国电信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case3.jpg" alt="">
-						<div class="caption">
-							<h4>中国联通</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case4.jpg" alt="">
-						<div class="caption">
-							<h4>中国电信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case1.jpg" alt="">
-						<div class="caption">
-							<h4>中国移动通信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case2.jpg" alt="">
-						<div class="caption">
-							<h4>中国石化</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case4.jpg" alt="">
-						<div class="caption">
-							<h4>中国电信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case1.jpg" alt="">
-						<div class="caption">
-							<h4>中国移动通信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case3.jpg" alt="">
-						<div class="caption">
-							<h4>中国联通</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
-				<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
-					<div class="thumbnail">
-						<img src="__PUBLIC__/img/case4.jpg" alt="">
-						<div class="caption">
-							<h4>中国电信</h4>
-							<p>参与了本机构的总裁管理培训课程，学员反馈意见良好。</p>
-						</div>
-					</div>
-				</div>
+				</volist>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12">{$page}</div>
 			</div>
 		</div>
 	</div>

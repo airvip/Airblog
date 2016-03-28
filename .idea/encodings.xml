@@ -16,7 +16,6 @@
     <file url="file://$PROJECT_DIR$/Application/Admin/View/Public/styles/font-awesome.min.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Admin/View/Public/styles/login.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Admin/View/Public/styles/main.css" charset="UTF-8" />
-    <file url="file://$PROJECT_DIR$/Application/Home/Controller/AboutController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/BlogController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/CommonController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/EmptyController.class.php" charset="UTF-8" />

@@ -10,11 +10,10 @@ class CommonController extends Controller {
         $admin  = M('User')->where(array('id'=>$_SESSION['user']['id']))->find();
         $this->assign('admin',$admin);
     }
-    public function index(){
-       $this->display();
+
+    public function _empty(){
+        $this->error('非法操作');
     }
-
-
     //图片上传方法
     protected function upload($Files,$path='Avatar',$type=array('jpg','png','jpeg')){
         $upload = new \Think\Upload();                              // upload class

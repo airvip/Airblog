@@ -9,9 +9,14 @@ class PageController extends CommonController {
 
     //显示列表
     public function index(){
-
         $this->display();
     }
 
+    //巨幕
+    public function jumbotron(){
+        $list   = M('Conf')->field('name,content')->where(array('pid'=>1))->select();
+        $this->assign('list',$list);
+        $this->display();
+    }
 
 }

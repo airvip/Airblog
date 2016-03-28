@@ -44,7 +44,7 @@ class LinkController extends CommonController {
         $map    = array('id' => $temp,'status'=>array('neq',2));
         $item   = $this->link -> where($map)-> find();
         if(false === $item)$this->error('系统出现了不可预知的问题...');
-        if(null === $item)$this->error('该标签不存在...');
+        if(null === $item)$this->error('该对象不存在...');
         $this->assign('item',$item);
         $this->display();
     }
@@ -88,6 +88,19 @@ class LinkController extends CommonController {
         if(false === $list)$this->error('系统出现了不可预知的问题...');
         $this->assign('list',$list);
         $this->display('Admin@Link/index');
+    }
+
+    //修改排序
+    public function order(){
+        if(!IS_AJAX)$this->error('非法操作');
+        $temp   = I('post.');
+        $data   = array(
+            'id'     => $temp['id'],
+            'sort'   => $temp['sort']
+        );
+        $rs=$this->link->save($data);
+        if(false === $rs)ajax_return(0,'','排序调整失败');
+        ajax_return(1,'','');
     }
 
 

@@ -28,9 +28,9 @@
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">					
 					<li>
-						<a href="{:U('Admin/Link/index')}">友情链接</a>/
+						<a href="{:U('Admin/Project/index')}">案例管理</a>/
 					</li>
-					<li>友情链接列表 </li>
+					<li>列表 </li>
 				</ol>
 				<div class="clearfix">
 				</div>
@@ -49,12 +49,12 @@
 
 									<div class="row">
 										<div class="col-xs-5">
-											<form class="navbar-form " action="{:U('Admin/Link/search')}" method="post" role="search" >
+											<form class="navbar-form " action="{:U('Admin/Project/search')}" method="post" role="search" >
 												<div class="input-group">
 													<div class="input-group-btn">
 														<select class="form-control btn" name="name">
-															<option value="name">连接名称</option>
-															<option value="link_url">连接地址</option>
+															<option value="name">案例名称</option>
+															<option value="info">简要说明</option>
 
 														</select>
 													</div>
@@ -67,8 +67,8 @@
 										</div>
 										<div class="col-xs-7">
 											<div class="navbar-form text-right">
-												<a href="{:U('Admin/Link/add')}" type="button" title="新增连接" class="btn btn-success" >
-													<i class="fa fa-plus-square"></i> 新增连接
+												<a href="{:U('Admin/Project/add')}" type="button" title="新增案例" class="btn btn-success" >
+													<i class="fa fa-plus-square"></i> 新增案例
 												</a>
 											</div>
 										</div>
@@ -85,8 +85,8 @@
 										<thead>
 											<tr>
 												<th>#</th>
-												<th>连接名称</th>
-												<th>链接地址</th>
+												<th>案例名称</th>
+												<th>简要说明</th>
 												<th>是否显示</th>
 												<th>排序</th>
 												<th>创建时间</th>
@@ -100,8 +100,8 @@
 													<td attr="{$vo['id']}">{$key+1}</td>
 													<td>{$vo['name']}</td>
 													<td>
-														<div class="content-hidden" title="{$vo['link_url']}">
-															{$vo['link_url']}
+														<div class="content-hidden" title="{$vo['info']}">
+															{$vo['info']}
 														</div>
 													</td>
 													<td>
@@ -114,7 +114,7 @@
 														{:date('Y-m-d H:i:s',$vo['create_time'])}
 													</td>
 													<td id="user-fa">
-														<a class="btn btn-warning btn-xs" href="{:U('Admin/Link/edit',array('id'=>$vo['id']))}">
+														<a class="btn btn-warning btn-xs" href="{:U('Admin/Project/edit',array('id'=>$vo['id']))}">
 															<i class="fa fa-pencil-square-o" title="编辑"></i>
 														</a> 
 														<a class="btn btn-danger btn-xs">
@@ -155,10 +155,34 @@
 
 
 
-
-
-
-
+			//排序修改
+			$('.tag-order').blur(function(){
+				var id		= $(this).attr('attr');
+				var sort	= parseInt($(this).val());
+				if(!(sort >= 0 && sort <= 10)){
+					alert('排序值必须在0-10之间');
+					$(this).focus();
+					return;
+				}
+				//发送ajax请求
+				$.ajax({
+					type:'post',
+					url:"{:U('Admin/Project/order')}",
+					//data:'u_state='+id,
+					data:{
+						'id':id,
+						'sort':sort,
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.code){
+							location.reload();return;
+						}else{
+							alert(data.mess);return;
+						}
+					},
+				});
+			});
 
 
 
@@ -170,7 +194,7 @@
 				if( false == rs)return;
 				$.ajax({
 					type:'post',
-					url:'{:U("Admin/Link/delete")}',
+					url:'{:U("Admin/Project/delete")}',
 					data:{
 						'id':id,
 					},
@@ -185,41 +209,6 @@
 				});
 			});
 		});
-
-		
-		
-		$('.link-order').blur(function(){
-			var id=$(this).attr('attr');
-			var lk_order=parseInt($(this).val());
-			
-			if(lk_order>=0 && lk_order<=10){
-				$.ajax({
-					type:'post',
-					url:"{:U('Link/order')}",
-	//				data:'u_state='+id,
-					data:{
-						'lk_id':id,
-						'lk_order':lk_order,
-					},
-					dataType:"json",
-					success:function(data){
-						if(data.code){
-							alert(data.mess);
-							self.location='{:U("Admin/Link/index")}';
-							return;
-						}else{
-							alert(data.mess);
-							return;
-						}
-					},
-				});
-			}else{
-				alert('排序值必须在0-10之间');return;
-			}
-		});
-		
-		
-		
 	</script>
 
 </body>

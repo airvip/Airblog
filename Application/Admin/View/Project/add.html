@@ -21,7 +21,7 @@
 				</div>
 				<ol class="breadcrumb page-breadcrumb pull-left">
 					<li>
-						<a href="{:U('Admin/Link/index')}">友情链接</a>/
+						<a href="{:U('Admin/Project/index')}">案例管理</a>/
 					</li>
 					<li>添加</li>
 				</ol>
@@ -40,28 +40,49 @@
 							<div class="portlet box">
 								<div class="portlet-body" id="user-edit-information">
 								
-									<form action="{:U('Admin/Link/add_run')}" method="post" class="form-horizontal">
-										<h3>新增友情链接</h3><hr>
-										<div class="form-group">
-											<label class="col-sm-3 control-label">连接名称</label>
+									<form action="{:U('Admin/Project/add_run')}" method="post" class="form-horizontal"  enctype="multipart/form-data">
+										<h3>添加案例</h3><hr>
+										<div class="form-group"><label class="col-sm-3 control-label">案例图片</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="text" name="name" required placeholder="连接名称" class="form-control"/>
+														<input type="file" name="thumb" required  class="form-control"/>
+														<div class="text-red">案例图片为700*438的等比大图</div>
 													</div>
 												</div>
 											</div>
 										</div>
 										<div class="form-group">
-											<label class="col-sm-3 control-label">连接地址</label>
+											<label class="col-sm-3 control-label">案例名称</label>
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-6">
-														<input type="text" name="link_url" required placeholder="连接地址" class="form-control"/>
+														<input type="text" name="name" required placeholder="案例名称" class="form-control"/>
 													</div>
 												</div>
 											</div>
 										</div>
+										<div class="form-group"><label class="col-sm-3 control-label">简要说明</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<textarea class="form-control" name="info" required  rows="3"></textarea>
+														<div class="text-red">简要说明请少于15个字</div>
+													</div>
+												</div>
+											</div>
+										</div>
+										<div class="form-group">
+											<label class="col-sm-3 control-label">案例地址</label>
+											<div class="col-sm-9 controls">
+												<div class="row">
+													<div class="col-xs-6">
+														<input type="text" name="url" required placeholder="案例地址" class="form-control"/>
+													</div>
+												</div>
+											</div>
+										</div>
+
 										<div class="form-group">
 											<label class="col-sm-3 control-label">是否显示</label>
 											<div class="col-sm-6 controls">

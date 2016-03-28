@@ -155,6 +155,34 @@
 
 
 
+			//排序修改
+			$('.tag-order').blur(function(){
+				var id		= $(this).attr('attr');
+				var sort	= parseInt($(this).val());
+				if(!(sort >= 0 && sort <= 10)){
+					alert('排序值必须在0-10之间');
+					$(this).focus();
+					return;
+				}
+				//发送ajax请求
+				$.ajax({
+					type:'post',
+					url:"{:U('Admin/Link/order')}",
+					//data:'u_state='+id,
+					data:{
+						'id':id,
+						'sort':sort,
+					},
+					dataType:"json",
+					success:function(data){
+						if(data.code){
+							location.reload();return;
+						}else{
+							alert(data.mess);return;
+						}
+					},
+				});
+			});
 
 
 
@@ -184,42 +212,12 @@
 					},
 				});
 			});
-		});
 
-		
-		
-		$('.link-order').blur(function(){
-			var id=$(this).attr('attr');
-			var lk_order=parseInt($(this).val());
-			
-			if(lk_order>=0 && lk_order<=10){
-				$.ajax({
-					type:'post',
-					url:"{:U('Link/order')}",
-	//				data:'u_state='+id,
-					data:{
-						'lk_id':id,
-						'lk_order':lk_order,
-					},
-					dataType:"json",
-					success:function(data){
-						if(data.code){
-							alert(data.mess);
-							self.location='{:U("Admin/Link/index")}';
-							return;
-						}else{
-							alert(data.mess);
-							return;
-						}
-					},
-				});
-			}else{
-				alert('排序值必须在0-10之间');return;
-			}
+
+
+
+
 		});
-		
-		
-		
 	</script>
 
 </body>
