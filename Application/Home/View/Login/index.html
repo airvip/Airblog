@@ -1,0 +1,37 @@
+<include file="Home@Common/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/login.css">
+</head>
+<body>
+
+    <div class="container">
+      <div class="wid-330">
+
+        <div class="login-width">
+          <img src="__PUBLIC__/img/logo.png" alt="" class="img-responsive center-block">
+        </div>
+      <form class="form-signin" method="post" action="{:U('Home/Login/login_run')}">
+         <label for="nickname" class="sr-only">Email address</label>
+         <input type="text" id="nickname" name="nickname" class="form-control" placeholder="Nickname " required autofocus>
+         <label for="pwd" class="sr-only">Password</label>
+         <input type="password" id="pwd" name="user_pass" class="form-control" placeholder="Password" required>
+         <div class="checkbox">
+           <label>
+              <input type="checkbox" value="remember-me"> Remember me
+           </label>
+          </div>
+          <button class="btn btn-lg btn-success btn-block" type="submit">Sign in</button>
+      </form>
+        <div class="login-width">
+          <p>还没有账户 ？</p>
+          <a class="btn btn-lg btn-warning btn-block" href="{:U('Home/Login/reg')}">立即注册 </a>
+        </div>
+
+      </div>
+    </div> <!-- /container -->
+
+
+
+    <script>
+    </script>
+</body>
+</html>
