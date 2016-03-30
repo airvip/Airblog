@@ -18,9 +18,10 @@ class LoginController extends Controller {
         $temp   = I('post.');
         if(empty($temp['nickname']) || empty($temp['user_pass']))$this->error('登录账户与密码不能为空');
         $map    = array(
-            'nickname'  => $temp['nickname'],
-            'user_pass' => md5($temp['user_pass']),
-            'user_type' => 0
+            'nickname'      => $temp['nickname'],
+            'user_pass'     => md5($temp['user_pass']),
+            'user_type'     => 0,
+            'user_status'   => 1
         );
         $admin  = $this->user->where($map)->find();
         if(false === $admin)$this->error('系统出现了不可预知的问题...');

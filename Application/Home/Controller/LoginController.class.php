@@ -9,7 +9,7 @@ class LoginController extends Controller {
     }
     //登录
     public function index(){
-        $this->display();
+        $this->display('Home@Login/login');
     }
 
     //登录操作
@@ -18,9 +18,9 @@ class LoginController extends Controller {
         $temp   = I('post.');
         if(empty($temp['nickname']) || empty($temp['user_pass']))$this->error('登录账户与密码不能为空');
         $map    = array(
-            'nickname'  => $temp['nickname'],
-            'user_pass' => md5($temp['user_pass']),
-            'user_type' => 1
+            'nickname'      => $temp['nickname'],
+            'user_pass'     => md5($temp['user_pass']),
+            'user_status'   => 1
         );
         $admin  = $this->user->where($map)->find();
         if(false === $admin)$this->error('系统出现了不可预知的问题...');
@@ -44,6 +44,38 @@ class LoginController extends Controller {
     //注册
     public function reg(){
         $this->display();
+    }
+    //注册操作
+    public function reg_run(){
+        if(!IS_POST)$this->error('非法请求...');
+        $temp   = I('post.');
+        if(empty($temp['nickname']) || empty($temp['user_pass']) || empty($temp['user_email']))$this->error('登录账户与密码不能为空');
+        $map    = array(
+            'nickname'   => $temp['nickname'],
+            'user_email' => $temp['user_email'],
+            '_logic'      => $temp['OR']
+        );
+        $user   = $this->user->where($map)->find();
+        if(null == $user)$this->error('昵称或邮箱已经被占用');
+        $data   = array(
+            'nickname'      => $temp['nickname'],
+            'user_pass'     => $temp['user_pass'],
+            'user_email'    => $temp['user_email'],
+            'user_status'   => 1,
+            'user_type'     => 1,
+        );
+        $user_id    = $this->user->add($data);
+        $ip     = get_client_ip(1);
+        $data_user_info = array(
+            'login_time'    => time(),
+            'login_ip'      => $ip,
+            'user_id'       => $user_id,
+            'create_time'   => time()
+        );
+        $rs = M('User_info')->add($data_user_info);
+        if(false === $user_id || false === $rs)$this->error('系统发生错误...');
+        $_SESSION['user']['id'] = $user_id;
+        $this->redirect('Home/Index/index');
     }
     //退出登录
     public function logout(){

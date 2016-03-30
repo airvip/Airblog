@@ -7,7 +7,8 @@ class CommonController extends Controller {
          if(!isset($_SESSION['user']['id'])){
              $this->redirect('Admin/Login/index');
          }
-        $admin  = M('User')->where(array('id'=>$_SESSION['user']['id']))->find();
+        $admin  = M('User')->where(array('id'=>$_SESSION['user']['id'],'user_type'=>0))->find();
+        if(null == $admin) $this->redirect('Admin/Login/index');
         $this->assign('admin',$admin);
     }
 

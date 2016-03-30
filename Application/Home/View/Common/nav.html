@@ -12,6 +12,14 @@
 
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
+				<form action="{:U('Home/Search/index')}" method="post" class=" navbar-form navbar-left" role="search">
+					<div class="input-group">
+						<input type="text" name="key_word" required class="form-control" placeholder="KeyWords">
+						<span class="input-group-btn">
+        					<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        				</span>
+					</div>
+				</form>
 				<ul class="nav navbar-nav navbar-right">
 					<li>
 						<a href="{:U('Home/Index/index')}">
@@ -32,17 +40,32 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu">
+							<if condition="empty($_SESSION['user']['id'])">
+								<li>
+									<a href="{:U('Home/Login/index')}">
+										登录
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="{:U('Home/Login/reg')}">
+										注册
+									</a>
+								</li>
+							<else/>
+								<li>
+									<a href="{:U('User/Index/index')}">
+										用户中心
+									</a>
+								</li>
+								<li class="divider"></li>
+								<li>
+									<a href="{:U('Home/Login/logout')}">
+										退出登录
+									</a>
+								</li>
+							</if>
 
-							<li>
-								<a href="{:U('Home/Login/index')}">
-									登录
-								</a>
-							</li>
-							<li>
-								<a href="{:U('Home/Login/reg')}">
-									注册
-								</a>
-							</li>
 						</ul>
 					</li>
 				</ul>

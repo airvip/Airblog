@@ -1,0 +1,65 @@
+<include file="Home@Common/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="">
+
+            <div class="login-width">
+                <a href="{:U('Home/Index/index')}">
+                    <img src="__PUBLIC__/img/logo.png" alt="" class="img-responsive center-block">
+                </a>
+            </div>
+
+            <form class="form-signin" method="post" action="{:U('Home/Login/reg_run')}">
+                <div class="form-group  has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+                        <input type="text" placeholder="ninkname" class="form-control" name="nickname" >
+                    </div>
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-envelope"></i></span>
+                        <input type="email" placeholder="email" class="form-control" name="user_email" >
+                    </div>
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+
+                <div class="form-group  has-feedback">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-asterisk"></i></span>
+                        <input type="password" placeholder="password" class="form-control" name="user_pass" >
+                    </div>
+                    <span class="glyphicon glyphicon-ok form-control-feedback hide" aria-hidden="true"></span>
+                </div>
+
+                <button class="btn btn-default btn-success btn-block" type="submit">Sign up</button>
+            </form>
+
+            <div class="login-width">
+                <div class="form-group">
+                    已有账户 ? <a class="pull-right" href="{:U('Home/Index/index')}">返回首页</a>
+                    <div class="clearfix"></div>
+                </div>
+                <div class="form-group">
+                    <a class="btn btn-default btn-warning btn-block" href="{:U('Home/Login/index')}">立即登录 </a>
+                </div>
+                <p>
+                    忘记密码 ? <a class="pull-right" href="{:U('Home/Login/for_pass')}">找回密码</a>
+                <div class="clearfix"></div>
+                </p>
+            </div>
+
+        </div>
+    </div> <!-- /container -->
+
+
+
+    <script>
+    </script>
+</body>
+</html>
