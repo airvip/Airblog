@@ -24,16 +24,17 @@
 				<volist name="list" id="vo">
 					<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
 						<div class="thumbnail">
-
-							<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
-								<img  src="__ROOT__/{$vo['thumb']}">
-							<else/>
-								<img  src="__PUBLIC__/img/no-pic.png">
-							</if>
-							<div class="caption">
-								<h4>{:empty($vo['name']) ? '保密内容' : $vo['name']}</h4>
-								<p>{:empty($vo['info']) ? '保密内容' : $vo['info']}</p>
-							</div>
+							<a href="{$vo['url']}" target="_blank">
+								<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
+									<img  src="__ROOT__/{$vo['thumb']}">
+								<else/>
+									<img  src="__PUBLIC__/img/no-pic.png">
+								</if>
+								<div class="caption">
+									<h4>{:empty($vo['name']) ? '保密内容' : $vo['name']}</h4>
+									<p>{:empty($vo['info']) ? '保密内容' : $vo['info']}</p>
+								</div>
+							</a>
 						</div>
 					</div>
 				</volist>

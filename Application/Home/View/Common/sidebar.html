@@ -4,7 +4,7 @@
 <div class="container-fluid">
 	<volist name="list_bar" id="vo">
 		<if condition="$key lt 3">
-			<a href="" class="">
+			<a href="{:U('Home/Blog/index',array('id'=>$vo['id']))}" class="">
 				<div class="row">
 					<div class="col-md-5" style="margin:12px 0;padding:0;">
 						<if condition="!empty($vo['thumb']) && file_exists($vo['thumb'])">
@@ -26,7 +26,7 @@
 			<volist name="list_bar" id="vo">
 				<if condition="$key gt 2">
 					<li>
-						<b>{$key+1}</b><a href="">{$vo['title']}</a>
+						<b>{$key+1}</b><a href="{:U('Home/Blog/index',array('id'=>$vo['id']))}">{$vo['title']}</a>
 					</li>
 				</if>
 			</volist>
@@ -38,6 +38,6 @@
 </blockquote>
 <div class="cloud-tags">
 	<volist name="list_tag" id="vo">
-		<a href="{:U('Home/Search/index',array('name'=>'tags','id'=>$vo['id']))}">{$vo['name']}</a>
+		<a href="{:U('Home/Search/index',array('tags_name'=>$vo['name']))}">{$vo['name']}</a>
 	</volist>
 </div>

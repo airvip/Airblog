@@ -72,7 +72,11 @@ class CommonController extends Controller {
         return $list;
     }
 
-
+    //退出登录
+    public function logout(){
+        unset($_SESSION['user']);
+        redirect(U('Admin/Login/index'));
+    }
 
 
 }

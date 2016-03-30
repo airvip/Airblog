@@ -42,9 +42,9 @@
 						{$item['content']}
 					</article>
 					<p class="tags">
-						<volist name="tag_list" id="vo">
+						<volist name="item['tags']" id="vo">
 							<label style="margin-right: 5px;">
-								<span class="glyphicon glyphicon-tag"></span> {$vo['name']}
+								<span class="glyphicon glyphicon-tag"></span> {$vo}
 							</label>
 						</volist>
 					</p>

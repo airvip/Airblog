@@ -72,7 +72,7 @@
 											<div class="col-sm-9 controls">
 												<div class="row">
 													<div class="col-xs-9">
-														<input type="file" name="thumb" required  class="form-control"/>
+														<input type="file" name="thumb"   class="form-control"/>
 														<div class="text-red">缩略图为350*220的等比大图</div>
 													</div>
 												</div>
@@ -98,9 +98,9 @@
 												<div class=" info-checkbox">
 													<volist name="list" id="vo">
 															<label >
-																<input type="checkbox" value="{$vo['id']}" name="tags[]"
+																<input type="checkbox" value="{$vo['name']}" name="tags[]"
 																	<volist name="item['tags']" id="vos">
-																		<if condition="$vo['id'] eq $vos[key]">
+																		<if condition="$vo['name'] eq $vos">
 																			checked="checked"
 																		</if>
 																	</volist>

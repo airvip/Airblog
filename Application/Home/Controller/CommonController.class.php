@@ -116,4 +116,10 @@ class CommonController extends Controller {
         return($mail->Send());
     }
 
+    //退出登录
+    public function logout(){
+        unset($_SESSION['user']);
+        redirect(U('Home/Login/index'));
+    }
+
 }

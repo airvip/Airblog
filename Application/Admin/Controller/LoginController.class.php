@@ -5,6 +5,8 @@ class LoginController extends Controller {
     public function _initialize(){
         $this->user          = M('User');
         $this->user_info    = M('User_info');
+        if(isset($_SESSION['user']) && $_SESSION['user'] == 0)$this->redirect('Admin/Index/index');
+        if(isset($_SESSION['user']) && $_SESSION['user'] == 1)$this->redirect('Home/Index/index');
     }
 
     //显示登录
@@ -26,7 +28,8 @@ class LoginController extends Controller {
         $admin  = $this->user->where($map)->find();
         if(false === $admin)$this->error('系统出现了不可预知的问题...');
         if(null === $admin)$this->error('账户或密码错误...');
-        $_SESSION['user']['id'] = $admin['id'];
+        $_SESSION['user']['id']         = $admin['id'];
+        $_SESSION['user']['user_type'] = $admin['user_type'];
 
         //获取上一次登录ip,写入本次登录ip与时间
         $ip     = get_client_ip(1);
@@ -41,11 +44,7 @@ class LoginController extends Controller {
         $this->redirect('Admin/Index/index');
     }
 
-    //退出登录
-    public function logout(){
-        unset($_SESSION['user']);
-        redirect(U('Admin/Login/index'));
-    }
+
 
 
 }

@@ -17,12 +17,8 @@ class BlogController extends CommonController {
         if(null == $item)$this->error('找不到该请求...');
         if(false == $item)$this->error('系统未知错误...');
         $item['content']   = htmlspecialchars_decode($item['content']);
+        $item['tags']       = explode(',',$item['tags']);
         $this->assign('item',$item);
-
-        $tag_map['id']  = array('in',$item['tags']);
-        $tag_field       = 'id,name';
-        $tag_list   = M('Tag')->field($tag_field)->where($tag_map)->select();
-        $this->assign('tag_list',$tag_list);
         $this->display();
     }
 

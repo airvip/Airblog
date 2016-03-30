@@ -6,6 +6,7 @@ class LoginController extends Controller {
     public function _initialize(){
         $this->user          = M('User');
         $this->user_info    = M('User_info');
+        if(isset($_SESSION['user']))$this->redirect('Home/Index/index');
     }
     //登录
     public function index(){
@@ -25,8 +26,8 @@ class LoginController extends Controller {
         $admin  = $this->user->where($map)->find();
         if(false === $admin)$this->error('系统出现了不可预知的问题...');
         if(null === $admin)$this->error('账户或密码错误...');
-        $_SESSION['user']['id'] = $admin['id'];
-
+        $_SESSION['user']['id']         = $admin['id'];
+        $_SESSION['user']['user_type'] = $admin['user_type'];
         //获取上一次登录ip,写入本次登录ip与时间
         $ip     = get_client_ip(1);
         $last   = $this->user_info->field('login_time,login_ip')->where(array('user_id'=>$admin['id']))->find();
@@ -53,13 +54,13 @@ class LoginController extends Controller {
         $map    = array(
             'nickname'   => $temp['nickname'],
             'user_email' => $temp['user_email'],
-            '_logic'      => $temp['OR']
+            '_logic'      => 'OR'
         );
         $user   = $this->user->where($map)->find();
-        if(null == $user)$this->error('昵称或邮箱已经被占用');
+        if(null != $user)$this->error('昵称或邮箱已经被占用');
         $data   = array(
             'nickname'      => $temp['nickname'],
-            'user_pass'     => $temp['user_pass'],
+            'user_pass'     => md5($temp['user_pass']),
             'user_email'    => $temp['user_email'],
             'user_status'   => 1,
             'user_type'     => 1,
@@ -72,15 +73,11 @@ class LoginController extends Controller {
             'user_id'       => $user_id,
             'create_time'   => time()
         );
-        $rs = M('User_info')->add($data_user_info);
+        $rs = $this->user_info->add($data_user_info);
         if(false === $user_id || false === $rs)$this->error('系统发生错误...');
         $_SESSION['user']['id'] = $user_id;
         $this->redirect('Home/Index/index');
     }
-    //退出登录
-    public function logout(){
-        unset($_SESSION['user']);
-        redirect(U('Home/Login/index'));
-    }
+
 
 }

@@ -58,9 +58,16 @@
 										用户中心
 									</a>
 								</li>
+								<if condition="$_SESSION['user']['user_type'] eq 0">
+									<li>
+										<a href="{:U('Admin/Index/index')}">
+											后台管理
+										</a>
+									</li>
+								</if>
 								<li class="divider"></li>
 								<li>
-									<a href="{:U('Home/Login/logout')}">
+									<a href="{:U('Home/Common/logout')}">
 										退出登录
 									</a>
 								</li>
