@@ -44,6 +44,7 @@ class LoginController extends Controller {
 
     //注册
     public function reg(){
+        if(C('REGIS_ON') == 0)$this->error('站长已经关闭注册功能');
         $this->display();
     }
     //注册操作
