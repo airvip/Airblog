@@ -13,7 +13,7 @@ class CommonController extends Controller {
     }
 
     //底部友情连接
-    private function link(){
+    public function link(){
         $field      = 'name,link_url';
         $map        = array('status'=>array('eq',1));
         $list       = M('Link')->field($field)->where($map)->select();
@@ -21,7 +21,7 @@ class CommonController extends Controller {
     }
 
     //侧栏云标签
-    private function cloud_tag(){
+    public function cloud_tag(){
         $field  = 'id,name';
         $map    = array('status'=>array('eq',1));
         $order  = 'sort ASC,create_time DESC';
@@ -30,7 +30,7 @@ class CommonController extends Controller {
     }
 
     //侧栏热门博客
-    private function hot_blog(){
+    public function hot_blog(){
         $field  = 'id,title,thumb,create_time';
         $map    = array( 'status'   => array('eq',1));
         $order  = 'view_count DESC';
@@ -39,7 +39,7 @@ class CommonController extends Controller {
     }
 
     //图片上传方法
-    protected function upload($Files,$path='Avatar',$type=array('jpg','png','jpeg')){
+    public function upload($Files,$path='Avatar',$type=array('jpg','png','jpeg')){
         $upload = new \Think\Upload();                              // upload class
         $upload->maxSize   = 2097152;                               // file size 8M is 8388608 ,default(2m)
         $upload->exts      = $type;//array('jpg', 'png', 'jpeg');       // what is type
@@ -55,7 +55,7 @@ class CommonController extends Controller {
         return $info;
     }
     //生成缩略图的方法
-    protected function thumb($data,$scale_width = '500',$scale_height = '500'){
+    public function thumb($data,$scale_width = '500',$scale_height = '500'){
         $source = './Uploads/'.$data['savepath'].$data['savename'];
         $thumb = './Uploads/'.$data['savepath'].'thumb_'.$data['savename'];
         $temp = new \Think\Image();
@@ -82,7 +82,7 @@ class CommonController extends Controller {
      * @param $obj 分页方法
      * @return mixed
      */
-    protected function page($obj, $size =25, $where = '', $order = '', $field = true, $join = '')
+    public function page($obj, $size =25, $where = '', $order = '', $field = true, $join = '')
     {
         $count = $obj->where($where)->join($join)->count();
         $Page = new \Think\Page($count, $size);

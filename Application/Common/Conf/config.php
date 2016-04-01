@@ -13,7 +13,7 @@
   array (
     0 => 'Home',
     1 => 'Admin',
-    2 => 'Api',
+    2 => 'User',
   ),
   'DEFAULT_MODULE' => 'Home',
   'LOAD_EXT_CONFIG' => 'system',
