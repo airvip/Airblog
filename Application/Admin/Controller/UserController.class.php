@@ -76,7 +76,8 @@ class UserController extends CommonController {
         $map_user_info  = array('user_id'=>$temp['id']);
         $rs_user_info   = M('User_info')->where($map_user_info)->save($data_user_info);
         if(false === $map_user && false === $rs_user_info)$this->error('更新失败');
-        $this->success('更新成功');
+        //$this->success('更新成功');
+        $this->redirect('Admin/User/index');
     }
 
     //删除用户（假删除user_status=2）

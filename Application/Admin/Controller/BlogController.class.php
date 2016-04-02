@@ -54,7 +54,8 @@ class BlogController extends CommonController {
         );
         $rs = $this->blog->add($data);
         if(!$rs)$this->error('操作失败');
-        $this->success('操作成功',U('Admin/Blog/index'));
+        //$this->success('操作成功',U('Admin/Blog/index'));
+        $this->redirect('Admin/Blog/index');
     }
 
     //查看
@@ -107,7 +108,8 @@ class BlogController extends CommonController {
         $map    = array('id'=>$temp['id']);
         $rs = $this->blog->where($map)->save($data);
         if(!$rs)$this->error('操作失败');
-        $this->success('操作成功');
+        //$this->success('操作成功');
+        $this->redirect('Admin/Blog/index');
     }
 
     //删除（假删除status=2）

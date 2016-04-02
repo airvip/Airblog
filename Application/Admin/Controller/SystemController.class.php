@@ -21,7 +21,8 @@ class SystemController extends CommonController {
         $config['DESCRIPTION']  = $temp['description'];
         $data="<?php\r\n return ".var_export($config,true).";\r\n?>";
         if (file_put_contents($path, $data)){
-            $this->success('修改成功',U('Admin/System/index'));
+            //$this->success('修改成功',U('Admin/System/index'));
+            $this->redirect('Admin/System/index');
         }else{
             $this->error('修改失败，请修改'.$path.'的写入权限');
         }
@@ -45,7 +46,8 @@ class SystemController extends CommonController {
         $config['DB_PORT']     = $temp['db_port'];
         $data="<?php\r\n return ".var_export($config,true).";\r\n?>";
         if (file_put_contents($path, $data)){
-            $this->success('修改成功',U('Admin/System/db'));
+            //$this->success('修改成功',U('Admin/System/db'));
+            $this->redirect('Admin/System/db');
         }else{
             $this->error('修改失败，请修改'.$path.'的写入权限');
         }
@@ -68,7 +70,8 @@ class SystemController extends CommonController {
         $config['MAIL_SMTPAUTH']       = $temp['mail_smtpauth'];
         $data="<?php\r\n return ".var_export($config,true).";\r\n?>";
         if (file_put_contents($path, $data)){
-            $this->success('修改成功',U('Admin/System/email'));
+            //$this->success('修改成功',U('Admin/System/email'));
+            $this->redirect('Admin/System/email');
         }else{
             $this->error('修改失败，请修改'.$path.'的写入权限');
         }

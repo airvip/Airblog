@@ -1,5 +1,5 @@
 body{background:#F9F9F9 url(../img/bg.png);padding-top: 50px;font-family: "Helvetica Neue", Helvetica, Arial, "Microsoft Yahei UI", "Microsoft YaHei", SimHei, "\5B8B\4F53", simsun, sans-serif;color: #666;}
-blockquote{border-left: 5px solid #c90;}
+blockquote{border-left: 5px solid #c90;word-wrap:break-word;}
 #myCarousel .carousel-inner img{margin:0 auto;}
 a{color: #666;}
 a:hover{color: #c90;text-decoration: none;}
@@ -62,7 +62,7 @@ a:hover{color: #c90;text-decoration: none;}
 .info-content {background-color: #F9F9F9;box-shadow: 2px 2px 3px #ccc;margin: 0 0 20px 0;}
 .info-content img {margin: 12px 0;}
 .info-content h4 {font-size: 14px;padding: 2px 0 0 0;}
-.info-content p {line-height: 1.6;color: #666;}
+.info-content p {line-height: 1.6;color: #666;word-wrap:break-word;}
 
 
 #case {padding: 20px 0;text-align: center;background-color: #F9F9F9;}
@@ -94,7 +94,8 @@ a:hover{color: #c90;text-decoration: none;}
 	padding: 20px;
 	background-color: #F9F9F9;
 	color: #666;
-	margin-bottom: 1rem;;
+	margin-bottom: 1rem;
+	word-wrap:break-word;
 }
 #article p{
 	font-size: 1.7rem;

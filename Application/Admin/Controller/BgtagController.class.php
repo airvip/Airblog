@@ -35,7 +35,8 @@ class BgtagController extends CommonController {
         );
         $rs = $this->tag->add($data);
         if(!$rs)$this->error('操作失败');
-        $this->success('操作成功');
+        //$this->success('操作成功');
+        $this->redirect('Admin/Bgtag/index');
     }
     //显示编辑
     public function edit(){
@@ -66,7 +67,8 @@ class BgtagController extends CommonController {
         );
         $rs     = $this->tag->save($data);
         if(false === $rs)$this->error('编辑失败');
-        $this->success('编辑成功');
+        //$this->success('编辑成功');
+        $this->redirect('Admin/Bgtag/index');
     }
 
     //删除（假删除status=2）
