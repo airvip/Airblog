@@ -12,4 +12,7 @@ class CommonController extends Controller {
         $common->hot_blog();
         $common->cloud_tag();
     }
+    public function _empty(){
+        $this->error('非法操作');
+    }
 }

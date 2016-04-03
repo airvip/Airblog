@@ -11,6 +11,9 @@ class CommonController extends Controller {
         $this->hot_blog();
         $this->cloud_tag();
     }
+    public function _empty(){
+        $this->error('非法操作');
+    }
 
     //底部友情连接
     public function link(){
