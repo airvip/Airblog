@@ -1,15 +1,27 @@
 <?php
 namespace Admin\Controller;
 use Think\Controller;
+use Think\Auth;
+
 class CommonController extends Controller {
     public function _initialize(){
-         header("Content-Type:text/html; charset=utf-8");
-         if(!isset($_SESSION['user']['id'])){
-             $this->redirect('Admin/Login/index');
-         }
+        header("Content-Type:text/html; charset=utf-8");
+        if(!isset($_SESSION['user']['id'])){
+            $this->redirect('Admin/Login/index');
+        }
+        $this->auth($_SESSION['user']['id']);
+
         $admin  = M('User')->where(array('id'=>$_SESSION['user']['id'],'user_type'=>0))->find();
         if(null == $admin) $this->redirect('Admin/Login/index');
         $this->assign('admin',$admin);
+    }
+
+    public function auth($uid = ''){
+        if($uid === '')$this->redirect('Admin/Login/index');
+        if($uid == 1)return true;
+        $auth   = new Auth();
+        $url    = MODULE_NAME.'/'.CONTROLLER_NAME.'/'.ACTION_NAME;
+        if( !$auth -> check($url,$uid))$this->error('您没有权限!');
     }
 
     public function _empty(){

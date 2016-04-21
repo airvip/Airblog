@@ -101,7 +101,7 @@ class Auth{
     public function check($name, $uid, $type=1, $mode='url', $relation='or') {
         if (!$this->_config['AUTH_ON'])
             return true;
-        $authList = $this->getAuthList($uid,$type); //获取用户需要验证的所有有效规则列表
+        $authList = $this->getAuthList($uid,$type); //获取用户需要验证的所有有效规则列表0
         if (is_string($name)) {
             $name = strtolower($name);
             if (strpos($name, ',') !== false) {

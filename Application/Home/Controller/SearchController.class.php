@@ -9,13 +9,13 @@ class SearchController extends CommonController {
     }
     //博客内容
     public function index(){
-        if(IS_GET && IS_POST)$this->error('非法操作');
+        if(!(IS_GET || IS_POST)) $this->error('非法操作');
         $temp   = I();
         $key    = array_keys($temp);
         if(empty($key[0]))$this->error('非法操作');
         switch($key[0]){
             case 'key_word' :
-                 $map['title|content|blog_info'] = array('like','%,'.$temp['key_word'].',%');break;
+                 $map['title|content|blog_info'] = array('like','%'.$temp['key_word'].'%');break;
             case 'tags_name' :
                 $map['tags']    = array('like','%'.$temp['tags_name'].'%');break;
             default :

@@ -38,7 +38,7 @@ class LoginController extends Controller {
             'last_ip'       => $last['login_ip'],
         );
         $this->user_info->where(array('user_id'=>$admin['id']))->save($data);
-        $this->redirect('Home/Index/index');
+        $this->redirect('User/Index/index');
     }
 
 

@@ -1,0 +1,19 @@
+	<!--footer Start-->
+	<footer id="footer" class="text-muted">
+		<div class="container">
+			<p>
+				<volist name="list_link" id="vo">
+					<if condition="$key neq 0">|</if><a href="{$vo['link_url']}">{$vo['name']}</a>
+				</volist>
+			</p>
+			<p>{:C('COPY')} Powered by Bootstrap & Thinkphp.</p>
+		</div>
+	</footer>
+	
+
+	
+	<script src="__PUBLIC__/js/jquery-2.1.1.min.js"></script>
+	<script src="__PUBLIC__/js/bootstrap.min.js"></script>
+	<!--footer End-->
+
+
