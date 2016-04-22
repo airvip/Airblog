@@ -58,7 +58,7 @@
 							<span class="caret"></span>
 						</a>
 						<ul class="dropdown-menu dropdown-user pull-right">
-							<li><a href="#"><i class="fa fa-user"></i>我的主页</a></li>
+							<li><a href="<?php echo U('User/Index/index');?>"><i class="fa fa-user"></i>我的主页</a></li>
 							<li class="divider"></li>
 							<li><a href="#"><i class="fa fa-lock"></i>Lock Screen</a></li>
 							<li><a href="<?php echo U('Admin/Common/logout');?>"><i class="fa fa-key"></i>退出登录</a></li>

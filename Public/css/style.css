@@ -76,7 +76,25 @@ a:hover{color: #c90;text-decoration: none;}
 #about .about {background-color: #fff;box-shadow: 2px 2px 3px #ccc;padding-bottom: 20px;}
 #about h3 {margin: 0 0 10px 0;padding: 20px 0;border-bottom: 1px solid #ccc;font-size: 18px;}
 #about p {line-height: 2;font-size: 13px;}
-
+#self-caption p.self-title{
+	text-align: center;
+	overflow: hidden;
+	word-wrap:break-word;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+#user-content{}
+#user-content div.info-radio{
+	padding-top: 5px;
+}
+#user-content div.info-checkbox{
+	padding-top: 5px;
+}
+#user-content div.info-checkbox>label{
+	border:1px solid #CCC;
+	padding:3px 6px;
+	margin-right: 10px;
+}
 
 
 #footer{background-color: #F9F9F9;border-top: 1px solid #ccc;padding:20px;text-align: center;}

@@ -1,0 +1,149 @@
+<include file="User@Common/header"/>
+</head>
+<body>
+	<include file="User@Common/nav"/>
+
+
+
+
+
+
+	<div id="about">
+		<div class="container">
+			<div class="row">
+				<!--sidebar START-->
+				<include file="User@Common/sidebar"/>
+				<!--sidebar END-->
+
+
+				<div class="col-md-9 col-sm-9 hidden-xs about" id="user-content">
+
+					<h3 class="hidden-xs">
+						<div class="btn-group" role="group" >
+							<a class="btn btn-sm btn-default" href="{:U('User/Blog/index')}">我的博客</a>
+							<a class="btn btn-sm btn-default" href="{:U('User/Blog/add')}">新增博客</a>
+						</div>
+					</h3>
+
+					<div class="row">
+						<div class="col-lg-12 col-sm-12 col-md-12">
+
+							<form action="{:U('User/Blog/add_run')}" method="post" class="form-horizontal" enctype="multipart/form-data">
+								<div class="form-group">
+									<label class="col-sm-3 control-label">博客标题</label>
+									<div class="col-sm-9 controls">
+										<div class="row">
+											<div class="col-xs-9">
+												<input type="text" name="title" required placeholder="博客标题" class="form-control" autofocus/>
+												<div class="text-danger">标题少于30字</div>
+											</div>
+										</div>
+									</div>
+								</div>
+								<div class="form-group"><label class="col-sm-3 control-label">缩略图片</label>
+									<div class="col-sm-9 controls">
+										<div class="row">
+											<div class="col-xs-9">
+												<input type="file" name="thumb" required  class="form-control"/>
+												<div class="text-danger">缩略图为350*220|500*315的等比大图</div>
+											</div>
+										</div>
+									</div>
+
+								</div>
+								<div class="form-group"><label class="col-sm-3 control-label">简要说明</label>
+									<div class="col-sm-9 controls">
+										<textarea class="form-control" name="blog_info"  rows="3"></textarea>
+										<div class="text-danger">简要说明请少于75个字，不填默认去博客前75个字</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">博客内容</label>
+									<div class="col-sm-9 controls">
+										<textarea id="editor" name="content" placeholder="博客内容" required ></textarea>
+										<div class="text-danger">图片尺寸为500*315|800*600的等比大图,博客内容请大于200字</div>
+									</div>
+								</div>
+								<div class="form-group">
+									<label class="col-sm-3 control-label">标签选择</label>
+
+									<div class="col-sm-9 controls">
+										<div class=" info-checkbox">
+											<volist name="list" id="vo">
+												<label >
+													<input type="checkbox" value="{$vo['name']}" name="tags[]" /> {$vo['name']}
+												</label>
+											</volist>
+										</div>
+										<div class="text-danger">标签必选，如若没有适合您的，请联系管理员QQ:980062449</div>
+									</div>
+								</div>
+
+								<hr/>
+								<div class="form-group">
+									<div class="col-sm-6 col-sm-offset-3">
+										<input type="hidden" name="auther" required  value="{$user['nickname']}" class="form-control"/>
+										<input type="hidden" name="user_id" required  value="{$user['id']}" class="form-control"/>
+										<button type="submit" class="btn btn-success btn-block">确认</button>
+									</div>
+								</div>
+							</form>
+
+
+						</div>
+					</div>
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<include file="User@Common/footer"/>
+	<link type="text/css" rel="stylesheet" href="__PUBLIC__/pluge/simditor-2.3.6/styles/simditor.css">
+	<script src="__PUBLIC__/pluge/simditor-2.3.6/scripts/module.js"></script>
+	<script src="__PUBLIC__/pluge/simditor-2.3.6/scripts/hotkeys.js"></script>
+	<script src="__PUBLIC__/pluge/simditor-2.3.6/scripts/uploader.js"></script>
+	<script src="__PUBLIC__/pluge/simditor-2.3.6/scripts/simditor.js"></script>
+	<script>
+		$(function(){
+			$('#side-menu>li').removeClass('active');
+			$('#admin-blog').addClass('active');
+
+			var toolbar =['bold','italic','underline',
+				'color','ol','ul','blockquote','code','table','link','image',
+				'indent','alignment'];
+			var editor = new Simditor({
+				textarea: $('#editor'),
+				placeholder		: "博客生涯从此开始...",
+				toolbar			: toolbar,
+				toolbarFloat		: true,
+				toolbarFloatOffset: 0,
+				toolbarHidden		: false,
+				defaultImage		: 'images/image.png',
+				tabIndent			: true,
+				params				: {},/*Insert a hidden input in textarea to store params (key-value pairs). Usually used as the default params of the form. It will generate：<input type="hidden" name="key" value="val" />*/
+				upload:{
+					url					: "{:U('Admin/Blog/img_up_blog')}",
+					params				: null,
+					fileKey			: 'blog_img',
+					connectionCount	: 3,
+					leaveConfirm		: '图片正在上传,真要离开吗?',
+				},
+				pasteImage 		: true,
+				//optional options
+			});
+
+
+		});
+	</script>
+</body>
+</html>

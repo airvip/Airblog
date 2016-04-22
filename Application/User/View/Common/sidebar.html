@@ -1,5 +1,22 @@
+<div class="col-md-3 col-sm-3 hidden-xs">
 <div class="list-group">
-	<a class="list-group-item" href="{:U('User/Index/index')}">个人主页</a>
-	<a class="list-group-item" href="{:U('User/Blog/index')}">我的博客</a>
-	<a class="list-group-item" href="{:U('User/Person/index')}">个人信息</a>
+	<a class="list-group-item" href="{:U('User/Index/index')}">
+		<span class="glyphicon glyphicon-home"></span>
+		我的主页
+	</a>
+	<a class="list-group-item" href="{:U('User/Blog/index')}">
+		<span class="glyphicon glyphicon-list-alt"></span>
+		我的博客
+	</a>
+	<a class="list-group-item" href="{:U('User/Person/index')}">
+		<span class="glyphicon glyphicon-user"></span>
+		我的资料
+	</a>
+	<if condition="$_SESSION['user']['user_type'] eq 0">
+		<a class="list-group-item" href="{:U('Admin/Index/index')}">
+			<span class="glyphicon glyphicon-folder-open"></span>
+			后台管理
+		</a>
+	</if>
+</div>
 </div>

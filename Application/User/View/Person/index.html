@@ -1,32 +1,24 @@
-<include file="Home@Common/header"/>
+<include file="User@Common/header"/>
 </head>
 <body>
-	<include file="Home@Common/nav"/>
+	<include file="User@Common/nav"/>
 
-	<div class="jumbotron">
-		<div class="container">
-			<hgroup>
-				<h1>那些年走过的坑</h1>
-				<h4>Airblog是一款基于Bootstrap&Tp的免费博客系统...</h4>
-				<h5>
-					<a href="http://wpa.qq.com/msgrd?v=3&uin=980062449&site=qq&menu=yes" target="_blank" title="技术支持">
-						阿尔维奇
-						<span class="text-error" title="私人QQ">980062449</span>
-					</a>
-				</h5>
-			</hgroup>
-		</div>
-	</div>
+
 
 	<div id="about">
 		<div class="container">
 			<div class="row">
-				<div class="col-md-3 hidden-sm hidden-xs">
-					<include file="User@Common/sidebar"/>
-				</div>
+				<!--sidebar START-->
+				<include file="User@Common/sidebar"/>
+				<!--sidebar END-->
+
 				<div class="col-md-9 about">
-					<h3>
-						<a href="{:U('User/Blog/add')}">新增博客</a>
+					<h3 class="hidden-xs">
+						<div class="btn-group" role="group" >
+							<a class="btn btn-sm btn-default" href="{:U('User/Person/edit')}">我的资料</a>
+							<a class="btn btn-sm btn-default" href="{:U('User/Person/edit')}">修改资料</a>
+							<a class="btn btn-sm btn-default" href="{:U('User/Person/avatar')}">更换头像</a>
+						</div>
 					</h3>
 					<p>瓢城企业培训有限公司是一家专业以智能化弱电工程为主的高科技民营企业，公司自创立以来一直专业致力于智能化弱电工程；始终坚持发扬"诚信、创新、沟通"为企业宗旨，以"技术、服务"为立业之本的团体精神，并形成一套完整的设计、安装、调试、培训、维护一站式服务体系。</p>
 					<a name="2"></a>
@@ -53,7 +45,7 @@
 
 
 
-	<include file="Home@Common/footer"/>
+	<include file="User@Common/footer"/>
 	<script>
 		
 	</script>

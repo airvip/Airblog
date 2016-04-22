@@ -33,32 +33,27 @@
 
 			</div>
 			<div class="collapse navbar-collapse" id="navbar">
-
-				<ul class="nav navbar-nav navbar-right visible-xs">
+				<form action="<?php echo U('Home/Search/index');?>" method="post" class=" navbar-form navbar-left" role="search">
+					<div class="input-group">
+						<input type="text" name="key_word" required class="form-control" placeholder="KeyWords">
+						<span class="input-group-btn">
+        					<button class="btn btn-default" type="submit"><span class="glyphicon glyphicon-search"></span></button>
+        				</span>
+					</div>
+				</form>
+				<ul class="nav navbar-nav navbar-right">
 					<li>
-						<a href="<?php echo U('User/Index/index');?>">
+						<a href="<?php echo U('Home/Index/index');?>">
 							<span class="glyphicon glyphicon-home"></span>
-							我的主页
+							首页
 						</a>
 					</li>
 					<li>
-						<a href="<?php echo U('User/Blog/index');?>">
-							<span class="glyphicon glyphicon-list-alt"></span>
-							我的博客
+						<a href="<?php echo U('Home/Project/index');?>">
+							<span class="glyphicon glyphicon-fire"></span>
+							案例
 						</a>
 					</li>
-					<li>
-						<a href="<?php echo U('User/Person/index');?>">
-							<span class="glyphicon glyphicon-user"></span>
-							我的资料
-						</a>
-					</li>
-					<?php if($_SESSION['user']['user_type'] == 0): ?><li>
-							<a href="<?php echo U('Admin/Index/index');?>">
-								<span class="glyphicon glyphicon-folder-open"></span>
-								后台管理
-							</a>
-						</li><?php endif; ?>
 					<li class="dropdown" id="web-user">
 						<a href="###" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="glyphicon glyphicon-user"></span>
@@ -103,67 +98,47 @@
 	</nav>
 	<!--nav end-->
 
+
+
+
+
 	<div class="jumbotron">
 		<div class="container">
 			<hgroup>
-				<h1>那些年走过的坑</h1>
-				<h4>Airblog是一款基于Bootstrap&Tp的免费博客系统...</h4>
-				<h5>
-					<a href="http://wpa.qq.com/msgrd?v=3&uin=980062449&site=qq&menu=yes" target="_blank" title="技术支持">
-						阿尔维奇
-						<span class="text-error" title="私人QQ">980062449</span>
-					</a>
-				</h5>
+				<h1>那些年走过的旅程</h1>
+				<h4>每一步的成长源于大家最初的知识积累...</h4>
 			</hgroup>
 		</div>
 	</div>
 
 
 
-	<div id="about">
+
+
+
+	<div id="case">
 		<div class="container">
 			<div class="row">
-				<!--sidebar START-->
-				<div class="col-md-3 col-sm-3 hidden-xs">
-<div class="list-group">
-	<a class="list-group-item" href="<?php echo U('User/Index/index');?>">
-		<span class="glyphicon glyphicon-home"></span>
-		我的主页
-	</a>
-	<a class="list-group-item" href="<?php echo U('User/Blog/index');?>">
-		<span class="glyphicon glyphicon-list-alt"></span>
-		我的博客
-	</a>
-	<a class="list-group-item" href="<?php echo U('User/Person/index');?>">
-		<span class="glyphicon glyphicon-user"></span>
-		我的资料
-	</a>
-	<?php if($_SESSION['user']['user_type'] == 0): ?><a class="list-group-item" href="<?php echo U('Admin/Index/index');?>">
-			<span class="glyphicon glyphicon-folder-open"></span>
-			后台管理
-		</a><?php endif; ?>
-</div>
-</div>
-				<!--sidebar END-->
-				<div class="col-md-9 col-sm-9 about">
-					<h3>
-						<a href="<?php echo U('User/Blog/add');?>">新增博客</a>
-					</h3>
-					<p>瓢城企业培训有限公司是一家专业以智能化弱电工程为主的高科技民营企业，公司自创立以来一直专业致力于智能化弱电工程；始终坚持发扬"诚信、创新、沟通"为企业宗旨，以"技术、服务"为立业之本的团体精神，并形成一套完整的设计、安装、调试、培训、维护一站式服务体系。</p>
-					<a name="2"></a>
-					<h3>加入我们</h3>
-					<p>网络已深刻改变着人们的生活，本地化生活服务市场前景巨大，生活半径团队坚信本地化生活服务与互联网的结合将会成就一家梦幻的公司，我们脚踏实地的相信梦想，我们相信你的加入会让生活半径更可能成为那家梦幻公司！生活半径人有梦想，有魄力，强执行力，但是要实现这个伟大的梦想，需要更多的有创业精神的你一路前行。公司将提供有竞争力的薪酬、完善的福利（五险一金）、期权、广阔的上升空间。只要你有能力、有激情、有梦想，愿意付出，愿意与公司共同成长，请加入我们！</p>
-					<p>请发送您的简历到：hr@xxx.com，我们会在第一时间联系您！</p>
-					<a name="3"></a>
-					<h3>联系方式</h3>
-					<p>地址：江苏省盐城市亭湖区大庆中路1234号</p>
-					<p>邮编：1234567</p>
-					<p>电话：010-88888888</p>
-					<p>传真：010-88666666</p>
-				</div>
+				<?php if(is_array($list)): $i = 0; $__LIST__ = $list;if( count($__LIST__)==0 ) : echo "" ;else: foreach($__LIST__ as $key=>$vo): $mod = ($i % 2 );++$i;?><div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 col">
+						<div class="thumbnail">
+							<a href="<?php echo ($vo['url']); ?>" target="_blank">
+								<?php if(!empty($vo['thumb']) && file_exists($vo['thumb'])): ?><img  src="/Airblog/<?php echo ($vo['thumb']); ?>">
+								<?php else: ?>
+									<img  src="/Airblog/Public/img/no-pic.png"><?php endif; ?>
+								<div class="caption">
+									<h4><?php echo empty($vo['name']) ? '保密内容' : $vo['name'];?></h4>
+									<p><?php echo empty($vo['info']) ? '保密内容' : $vo['info'];?></p>
+								</div>
+							</a>
+						</div>
+					</div><?php endforeach; endif; else: echo "" ;endif; ?>
+				<div class="col-lg-12 col-md-12 col-sm-12 col-xs-12"><?php echo ($page); ?></div>
 			</div>
 		</div>
 	</div>
+
+
+	
 
 
 
@@ -192,8 +167,6 @@
 
 
 
-	<script>
-		
-	</script>
+
 </body>
 </html>
