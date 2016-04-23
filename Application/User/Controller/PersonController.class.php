@@ -54,9 +54,19 @@ class PersonController extends CommonController {
 
     //先显示修改头像页面
     public function avatar(){
-        $this->avatar   = $this->user->field('avatar')->where(array('id'=>$_SESSION['user']['id']))->find();
-        dump($this->avatar);
+        $this->user   = $this->user->field('avatar,nickname')->where(array('id'=>$_SESSION['user']['id']))->find();
+        dump($this->user);
         $this->display();
+    }
+
+    public function avatar_run(){
+        if(!IS_POST)$this->error('非法操作');
+        if(empty($_FILES['avatar']['name']))$this->error('缩略图不能为空');
+        $img    = $this->upload($_FILES,'Avatar');
+        $thumb  = $this->thumb($img['avatar'],150,150);
+        $rs = $this->user->where(array('id'=>$_SESSION['user']['id']))->save(array('avatar'=>$thumb));
+        if(false === $rs)$this->error('更新失败');
+        $this->redirect('User/Person/avatar');
     }
 
 }

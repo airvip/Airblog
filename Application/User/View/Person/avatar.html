@@ -15,7 +15,26 @@
 				<div class="col-sm-9 col-md-9 about">
 					<include file="User@Person/nav"/>
 
-					<php>p( $avatar['avatar'])</php>
+					<if condition="!empty($user['avatar']) && file_exists($user['avatar'])">
+						<img class="img-responsive img-circle img-thumbnail center-block" src="__ROOT__/{$user['avatar']}">
+					<else/>
+						<img class="img-responsive img-circle img-thumbnail center-block" src="__PUBLIC__/img/default_avatar.jpg">
+					</if>
+
+					<h5 class="text-center">{$user['nickname']}</h5>
+
+
+					<form action="{:U('User/Person/avatar_run')}" method="post" class=" form-horizontal" enctype="multipart/form-data">
+						<div class="input-group">
+							<input type="file" name="avatar" required  class="form-control"/>
+							<span class="input-group-btn">
+								<button class="btn btn-default" type="submit">UP</button>
+							</span>
+						</div>
+						<p class="text-danger">头像为150*150的等比大图</p>
+					</form>
+
+
 
 				</div>
 			</div>

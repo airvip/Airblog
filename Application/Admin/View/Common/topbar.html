@@ -28,7 +28,7 @@
 					<li class="dropdown topbar-user">
 						<a data-hover="dropdown" href="#" class="dropdown-toggle">
 							<if condition="!empty($admin['avatar']) && file_exists($admin['avatar'])">
-								<img class="img-responsive img-circle" src="__ROOT__/Uploads/{$admin['avatar']}">
+								<img class="img-responsive img-circle" src="__ROOT__/{$admin['avatar']}">
 							<else/>
 								<img class="img-responsive img-circle" src="__PUBLIC__/img/default_avatar.jpg">
 							</if>

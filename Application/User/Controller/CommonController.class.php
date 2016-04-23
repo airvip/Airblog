@@ -20,4 +20,12 @@ class CommonController extends Controller {
     protected function page($obj, $size =25, $where = '', $order = '', $field = true, $join = ''){
         return A('Home/Common')->page($obj, $size =$size, $where =$where, $order =$order, $field = $field, $join = $join);
     }
+
+    protected function upload($file,$path='',$type=array('jpg','png','jpeg')){
+        return A('Home/Common')->upload($file,$path = $path,$type=$type);
+    }
+
+    protected function thumb($data,$scale_width=500,$scale_height=500){
+        return A('Home/Common')->thumb($data,$scale_width = $scale_width,$scale_height=$scale_height);
+    }
 }

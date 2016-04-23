@@ -57,7 +57,7 @@ class BlogController extends CommonController {
         $rs = $this->blog->add($data);
         if(!$rs)$this->error('操作失败');
         //$this->success('操作成功',U('Admin/Blog/index'));
-        $this->redirect('Admin/Blog/index');
+        $this->redirect('User/Blog/index');
     }
 
 

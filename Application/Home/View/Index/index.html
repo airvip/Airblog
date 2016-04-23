@@ -39,7 +39,16 @@
 									<div class="col-md-7 col-sm-7 col-xs-7">
 										<h4>{$vo['title']}</h4>
 										<p class="hidden-xs">{$vo['blog_info']}</p>
-										<p>{$vo['auther']} {:$vo['create_time'] == $vo['edit_time'] ? date('d/M/Y',$vo['create_time']).'发布' : date('d/M/Y',$vo['edit_time']).'修改'}</p>
+										<p>
+											<span class="glyphicon glyphicon-hourglass"></span>
+											{:$vo['create_time'] == $vo['edit_time'] ? date('d/M/Y',$vo['create_time']).'发布' : date('d/M/Y',$vo['edit_time']).'修改'}&nbsp;
+											<span class="glyphicon glyphicon-eye-open"></span>
+											{$vo['view_count']} &nbsp;
+											<if condition="$vo['recommend'] eq 1">
+												<span class="glyphicon glyphicon-fire"></span>
+												推荐
+											</if>
+										</p>
 									</div>
 								</a>
 							</div>

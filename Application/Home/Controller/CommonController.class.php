@@ -47,7 +47,7 @@ class CommonController extends Controller {
         $upload->maxSize   = 2097152;                               // file size 8M is 8388608 ,default(2m)
         $upload->exts      = $type;//array('jpg', 'png', 'jpeg');       // what is type
         $upload->rootPath  = './Uploads/';
-        $upload->savePath  = '$path/';                             // children file
+        $upload->savePath  = $path.'/';                             // children file
         $upload->autoSub   = true;
         $upload->subName   = array('date','Y/m/d');
         $info   =   $upload->upload($Files);
