@@ -53,6 +53,12 @@
 							我的资料
 						</a>
 					</li>
+					<?php if($_SESSION['user']['user_type'] == 0): ?><li>
+							<a href="<?php echo U('Admin/Index/index');?>">
+								<span class="glyphicon glyphicon-folder-open"></span>
+								后台管理
+							</a>
+						</li><?php endif; ?>
 					<li class="dropdown" id="web-user">
 						<a href="###" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
 							<span class="glyphicon glyphicon-user"></span>

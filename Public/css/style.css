@@ -95,6 +95,10 @@ a:hover{color: #c90;text-decoration: none;}
 	padding:3px 6px;
 	margin-right: 10px;
 }
+#user-content-table tr>td:nth-child(1){
+	text-align: right !important;
+	width: 25%;
+}
 
 
 #footer{background-color: #F9F9F9;border-top: 1px solid #ccc;padding:20px;text-align: center;}

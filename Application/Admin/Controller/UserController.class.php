@@ -9,7 +9,8 @@ class UserController extends CommonController {
     }
     //用户列表
     public function index(){
-        $user_type  = empty(I('user_type')) ? '' : I('user_type');
+        $temp_user_type  = I('user_type');
+        $user_type  = empty($temp_user_type) ? '' : I('user_type');
         $map    = array(
             'user_type'     => $user_type,
             'user_status'   => array('neq',2)

@@ -1,0 +1,106 @@
+<include file="User@Common/header"/>
+</head>
+<body>
+	<include file="User@Common/nav"/>
+
+
+
+	<div id="about">
+		<div class="container">
+			<div class="row">
+				<!--sidebar START-->
+				<include file="User@Common/sidebar"/>
+				<!--sidebar END-->
+
+				<div class="col-sm-9 col-md-9 about" id="user-content">
+					<include file="User@Person/nav"/>
+
+					<form action="{:U('User/Person/edit_run')}" method="post" class="form-horizontal">
+						<div class="form-group">
+							<label class="col-sm-3 control-label">性别</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12 info-radio">
+										<label >
+											<input type="radio" value="0" name="sex" <if condition="$user['sex'] eq 0">checked="checked"</if>/>保密
+										</label>
+										<label >
+											<input type="radio" value="1" name="sex" <if condition="$user['sex'] eq 1">checked="checked"</if>/>男
+										</label>
+										<label >
+											<input type="radio" value="2" name="sex"  <if condition="$user['sex'] eq 2">checked="checked"</if>"/>女
+										</label>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">所在国家</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="text" name="country" required value="{$user['country']}" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">所在省</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="text" name="province" required value="{$user['province']}" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">所在城市</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="text" name="city" required value="{$user['city']}" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">详细地址</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="text" name="address" required value="{$user['address']}" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<hr/>
+						<div class="form-group">
+							<div class="col-sm-6 col-sm-offset-3">
+								<button type="submit" class="btn btn-success">确认编辑</button>
+							</div>
+						</div>
+					</form>
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<include file="User@Common/footer"/>
+	<script>
+		
+	</script>
+</body>
+</html>

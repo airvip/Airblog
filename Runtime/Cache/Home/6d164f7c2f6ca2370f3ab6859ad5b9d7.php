@@ -130,7 +130,7 @@
 
 					<p class="title"><?php echo ($item['title']); ?></p>
 					<p class="time">
-						<?php echo $item['create_time'] == $item['edit_time'] ? date('Y-m-d H:i:s',$item['create_time']) : '修改:'.date('Y-m-d H:i:s',$item['edit_time']);?>
+						<?php echo $item['create_time'] == $item['edit_time'] ? date('d/M/Y',$item['create_time']) : '修改:'.date('d/M/Y',$item['edit_time']);?>
 
 					</p>
 					<blockquote>

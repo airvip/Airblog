@@ -69,7 +69,8 @@ class ProjectController extends CommonController {
             $img            = $this->upload($_FILES,'Project');
             $thumb          = $this->thumb($img['thumb'],700,438);
             $data['thumb'] = $thumb;
-            if(!empty(I('old_thumb')))@unlink(I('old_thumb'));
+            $old_thumb_temp = I('old_thumb');
+            if(!empty($old_thumb_temp))@unlink(I('old_thumb'));
         }
         $rs     = $this->project->save($data);
         if(false === $rs)$this->error('编辑失败');

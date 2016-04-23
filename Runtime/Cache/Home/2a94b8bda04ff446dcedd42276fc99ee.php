@@ -134,7 +134,7 @@
 									<div class="col-md-7 col-sm-7 col-xs-7">
 										<h4><?php echo ($vo['title']); ?></h4>
 										<p class="hidden-xs"><?php echo ($vo['blog_info']); ?></p>
-										<p><?php echo ($vo['auther']); ?> <?php echo $vo['create_time'] == $vo['edit_time'] ? '于'.date('Y-m-d H:i:s',$vo['create_time']).'发布' : '于'.date('Y-m-d H:i:s',$vo['edit_time'].'修改');?></p>
+										<p><?php echo ($vo['auther']); ?> <?php echo $vo['create_time'] == $vo['edit_time'] ? date('d/M/Y',$vo['create_time']).'发布' : date('d/M/Y',$vo['edit_time']).'修改';?></p>
 									</div>
 								</a>
 							</div><?php endforeach; endif; else: echo "" ;endif; ?>
