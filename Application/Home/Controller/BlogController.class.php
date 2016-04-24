@@ -21,7 +21,17 @@ class BlogController extends CommonController {
         $item['content']   = htmlspecialchars_decode($item['content']);
         $item['tags']       = explode(',',$item['tags']);
         $this->assign('item',$item);
+        //诸如评论
+        $this->get_comment($temp);
         $this->display();
+    }
+
+    public function get_comment($id){
+        if(empty($id))$this->error('非法获得评论');
+        $field      = 'id,comment_auther,content,create_time,blog_id,p_id';
+        $map        = array('blog_id'   => $id,'status'=>1);
+        $list       = M('Comment')->field($field)->where($map)->page('1,5')->order('create_time DESC')->select();
+        $this->assign('comment_list',$list);
     }
 
 

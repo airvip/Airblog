@@ -67,41 +67,32 @@ function cut_str($string, $sublen, $start = 0, $code = 'UTF-8') {
         return $tmpstr;
     }
 }
-//时间推算函数
-function postTime($date) {
-    $str = '';
-    $diff = time() - $date;
-    $day = floor($diff / 86400);
-    $free = $diff % 86400;
-    if($day > 0) {
-        return $day."日前";
-    }else{
-        if($free>0){
-            $hour = floor($free / 3600);
-            $free = $free % 3600;
-            if($hour>0){
-                return $hour."時間前";
-            }else{
-                if($free>0){
-                    $min = floor($free / 60);
-                    $free = $free % 60;
-                    if($min>0){
-                        return $min."分前";
-                    }else{
-                        if($free>0){
-                            return $free."秒前";
-                        }else{
-                            return 'さきほど';
-                        }
-                    }
-                }else{
-                    return 'さきほど';
-                }
-            }
-        }else{
-            return 'さきほど';
-        }
+/* 格式化时间戳 */
+function time_format($time){
+    //当前时间戳
+    $now=time();
+    //今天0时0分0秒
+    $today=strtotime(date('y-m-d',$now));
+    //传递时间与当前时间相差的秒数
+    $diff=$now - $time;
+    $str='';
+    switch ($diff){
+        case $diff<60:
+            $str= $diff.'&nbsp;秒前';
+            break;
+        case $diff<3600:
+            $str=floor($diff/60).'&nbsp;分钟前';
+            break;
+        case $diff<(3600*8):
+            $str=floor($diff/3600).'&nbsp;小时前';
+            break;
+        case $time>$today:
+            $str='今天&nbsp;'.date('H:i',$time);
+            break;
+        default:
+            $str=date('d/M/Y',$time);
     }
+    return $str;
 }
 
 //compute product tax

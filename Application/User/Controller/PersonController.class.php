@@ -55,7 +55,6 @@ class PersonController extends CommonController {
     //先显示修改头像页面
     public function avatar(){
         $this->user   = $this->user->field('avatar,nickname')->where(array('id'=>$_SESSION['user']['id']))->find();
-        dump($this->user);
         $this->display();
     }
 

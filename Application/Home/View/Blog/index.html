@@ -86,6 +86,128 @@
 					<div class="clearfix">
 					</div>
 				</div>
+				<style>
+					.blog_comments{
+						padding: 20px;
+						background-color: #F9F9F9;
+						color: #666;
+						margin-bottom: 1rem;
+						word-wrap: break-word;
+					}
+					#comments h4,#respond h4{
+						border-bottom: 1px solid #ddd;
+						padding-bottom: 5px;
+						color: #000000;
+						font-weight: bolder;
+					}
+					#comments .comment_count b,#num_limit{
+						font-family: Constantia,Georgia;
+						font-size: 22px;
+						font-style: italic;
+						font-weight: 700;
+					}
+					.comment_list{
+						padding-left: 0px;
+					}
+					.comment_list li {
+						list-style-type: none;
+						border-bottom: 1px dashed #ccc;
+						padding: 10px 5px 0;
+					}
+					#respond{margin-top: 20px;}
+				</style>
+				<section class="blog_comments">
+					<acticle id="comments">
+						<h4 class="comment_count">总共 <b>276</b> 条评论</h4>
+						<ol class="comment_list" id="comment_list">
+							<volist name="comment_list" id="vo">
+								<li>
+									<div id="comment-" class="comment-body">
+										<div class="comment-user pull-left" id="comment-{$vo['self_id']}">{$vo['comment_auther']}</div>
+										<div class="comment-tm pull-right">{:date('d/M/Y H:i',$vo['create_time'])}</div>
+										<div class="clearfix"></div>
+										<p>
+											{$vo['content']}
+										</p>
+										<div class="reply">
+											<a href="#respond" class="replay_comment" p_id = {$vo['p_id']} self_id = {$vo['id']}>回复</a>
+										</div>
+									</div>
+									<ul class="children" id="children-{$vo['self_id']}">
+									</ul>
+								</li>
+							</volist>
+
+
+
+							<li>
+								<div id="comment-111" class="comment-body">
+									<div class="comment-user pull-left">阿尔维奇</div>
+									<div class="comment-tm pull-right">2015/12/01 19:48</div>
+									<div class="clearfix"></div>
+									<p>
+										发表提问的字数不是很多的情况下 页面无法显示提问内容<br>
+										json = $.parseJSON(response); 无法执行，输入字符数字有限制，是有什么原因吗？
+									</p>
+									<div class="reply">
+										<a href="#respond">回复</a>
+									</div>
+								</div>
+								<ul class="children">
+									<li>
+										<div id="comment-11" class="comment-body">
+											<div class="comment-user pull-left">阿尔维奇</div>
+											<div class="comment-tm pull-right">2015/12/01 19:48</div>
+											<div class="clearfix"></div>
+											<p>
+												发表提问的字数不是很多的情况下 页面无法显示提问内容<br>
+												json = $.parseJSON(response); 无法执行，输入字符数字有限制，是有什么原因吗？
+											</p>
+											<div class="reply">
+												<a href="#respond">回复</a>
+											</div>
+										</div>
+									</li>
+								</ul>
+							</li>
+
+						</ol>
+						<button class="comment-more btn btn-success btn-block">显示更多评论</button>
+					</acticle>
+
+					<div id="respond" name="respond">
+						<h4 class="comment_count">发表评论</h4>
+						<div class="form-horizontal" >
+							<div class="form-group">
+								<label class="col-sm-12 ">用户昵称</label>
+								<div class="col-sm-12 controls">
+									<div class="row">
+										<div class="col-xs-12">
+											<input type="text" required readonly class="form-control" value="{:empty($_SESSION['user']['id']) ? '路人甲乙丙丁' : '您的昵称'}"/>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="form-group">
+								<label class="col-sm-6 ">评论内容</label>
+								<span class="col-sm-6 text-right ">您还可以输入 <b id="num_limit">140</b> 个字</span>
+								<div class="col-sm-12 controls">
+									<textarea class="form-control" name="content" id="respond_content"  rows="3"></textarea>
+								</div>
+							</div>
+							<hr/>
+							<div class="form-group">
+								<div class="col-sm-3">
+									<button type="submit" class="btn btn-success btn-block" p_id="0" blog_id="{$item['id']}" id="respond-sure">确认发表</button>
+								</div>
+							</div>
+						</div>
+					</div>
+				</section>
+
+
+
+
 			</div>
 			<div class="col-md-4 info-right hidden-xs hidden-sm">
 				<include file="Home@Common/sidebar"/>
@@ -107,6 +229,99 @@
 <script>
 
 	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","sqq","tsina","tqq","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
+
+	/**
+	 * 统计字数
+	 * @param  字符串
+	 * @return 数组[当前字数, 最大字数]
+	 */
+	function check (str) {
+		var num = [0, 140];
+		for (var i=0; i<str.length; i++) {
+			//字符串不是中文时
+			if (str.charCodeAt(i) >= 0 && str.charCodeAt(i) <= 255){
+				num[0] = num[0] + 0.5;//当前字数增加0.5个
+				num[1] = num[1] + 0.5;//最大输入字数增加0.5个
+			}else{
+				//字符串是中文时
+				num[0]++;//当前字数增加1个
+			}
+		}
+		return num;
+	}
+
+	$(function(){
+		$('#respond_content').focus(function () {
+			//转入文字时
+			$(this).keyup(function () {
+				var content = $(this).val();
+				//调用check函数取得当前字数
+				var lengths = check(content);
+				//最大允许输入140字个
+				if (lengths[0] >= 140) {
+					$(this).val(content.substring(0, Math.ceil(lengths[1])));
+				}
+				var num = 140 - Math.ceil(lengths[0]);
+				var msg = num < 0 ? 0 : num;
+				//当前字数同步到显示提示
+				$('#num_limit').html(msg);
+			});
+			//失去焦点时边框背景归位
+		});
+		$('#respond-sure').click(function(){
+			var content	 = $.trim($('#respond_content').val());
+			var blog_id  = parseInt($(this).attr('blog_id'));
+			var p_id	 = parseInt($(this).attr('p_id'));
+			if(content == '' || isNaN(blog_id) ){
+				swal('您属于非法提交','','error');return;
+			}
+			$.ajax({
+				type:'post',
+				url:'{:U("Home/Comment/add")}',
+				//data:'u_state='+id,
+				data:{
+					'blog_id'			: blog_id,
+					'content'			: content,
+					'p_id'				: p_id,
+				},
+				dataType:"json",
+				success:function(data){
+					if(1 == data.code){
+						swal('提交成功','','success');
+						$('#respond_content').val('');
+						$('#respond-sure').attr({'p_id':0});
+
+						var _html	= '<li><div id="comment-" class="comment-body">' +
+						'<div class="comment-user pull-left" id="comment-'+data.data.id+'">'+data.data.comment_auther+'</div>' +
+						'<div class="comment-tm pull-right">' +data.data.create_time+	'</div>'+
+						'<div class="clearfix"></div>' +
+						'<p>'+content+'</p>' +
+						'<div class="reply"><a class="replay_comment" href="#respond" p_id="'+data.data.p_id+'" self_id="'+data.data.id+'">回复</a></div>' +
+						'</div><ul class="children" id="children-'+data.data.id+'"></ul></li>';
+
+						p_id == 0 ? $('#comment_list').prepend(_html) : $('#childeren-'+data.data.id).append(_html);
+
+
+						return;
+						//location.reload();/
+						// self.location='{:U("Admin/User/index",array("user_type"=>1))}';
+					}else{
+						swal('提交失败','','error');return;
+					}
+				},
+			});
+		});
+
+		$('.replay_comment').click(function(){
+			var p_id	= $(this).attr('p_id');
+			$('#respond-sure').attr({'p_id':p_id});
+		});
+
+	});
+
+
+
+
 </script>
 </body>
 </html>
