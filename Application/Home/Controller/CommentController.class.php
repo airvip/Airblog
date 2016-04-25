@@ -8,6 +8,19 @@ class CommentController extends CommonController {
         $this->comment = M('Comment');
     }
 
+    public function get_comment_more(){
+        if(!IS_AJAX)$this->error('非法获得评论');
+        $page_id     = I('page_id');
+        $blog_id     = I('blog_id');
+        $field      = 'id,comment_auther,content,create_time,blog_id,p_id';
+        $map        = array('blog_id'   => $blog_id,'status'=>1);
+        $list       = M('Comment')->field($field)->where($map)->page($page_id.',5')->order('create_time ASC')->select();
+        if(false    === $list)ajax_return(0,'','系统发生了未知错误');
+        if(null    == $list)ajax_return(0,'','没有更多了');
+        $list       = arr1_arr2($list);
+        ajax_return(1,$list,'');
+    }
+
     //发布评论
     public function add(){
         if(!IS_AJAX)$this->error('非法操作');
@@ -22,7 +35,7 @@ class CommentController extends CommonController {
             $user_id        = 0;
         }
         $data   = array(
-            'content'            => $temp['content'],
+            'content'            => nl2br($temp['content']),
             'user_id'            => $user_id,
             'comment_auther'    => $comment_auther,
             'create_time'       => time(),
@@ -32,11 +45,12 @@ class CommentController extends CommonController {
         );
         $rs     = $this->comment->add($data);
         if(false === $rs)ajax_return(0,'','');
+        M('Blog')->where(array('id'=>$temp['blog_id']))->setInc('comment_count',1);
         $temp['p_id']   == 0 ? $id_tag  = $rs : $temp['p_id'];
         $return_data    = array(
             'comment_auther'=>$comment_auther,
             'id'=>$rs,
-            'create_time'=>date('d/M/Y H:i',$data['create_time']),
+            'create_time'=>$data['create_time'],
             'p_id'=>$temp['p_id']
             );
         ajax_return(1,$return_data,'');

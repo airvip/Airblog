@@ -26,13 +26,17 @@ class BlogController extends CommonController {
         $this->display();
     }
 
+    //该id为博客的id主键
     public function get_comment($id){
         if(empty($id))$this->error('非法获得评论');
         $field      = 'id,comment_auther,content,create_time,blog_id,p_id';
         $map        = array('blog_id'   => $id,'status'=>1);
-        $list       = M('Comment')->field($field)->where($map)->page('1,5')->order('create_time DESC')->select();
+        $list       = M('Comment')->field($field)->where($map)->page('1,5')->order('create_time ASC')->select();
+        $list       = arr1_arr2($list);
         $this->assign('comment_list',$list);
     }
+
+
 
 
 }

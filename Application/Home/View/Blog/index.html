@@ -109,22 +109,27 @@
 					.comment_list{
 						padding-left: 0px;
 					}
-					.comment_list li {
+					.comment_list li{
 						list-style-type: none;
-						border-bottom: 1px dashed #ccc;
 						padding: 10px 5px 0;
+					}
+					ul.children li{
+						border-top: 1px dashed #ccc;
+					}
+					.comment_list>li {
+						border-bottom: 1px dashed #ccc;
 					}
 					#respond{margin-top: 20px;}
 				</style>
 				<section class="blog_comments">
 					<acticle id="comments">
-						<h4 class="comment_count">总共 <b>276</b> 条评论</h4>
+						<h4 class="comment_count">总共 <b>{:empty($item['comment_count']) ? 0 : $item['comment_count'];}</b> 条评论</h4>
 						<ol class="comment_list" id="comment_list">
 							<volist name="comment_list" id="vo">
 								<li>
-									<div id="comment-" class="comment-body">
-										<div class="comment-user pull-left" id="comment-{$vo['self_id']}">{$vo['comment_auther']}</div>
-										<div class="comment-tm pull-right">{:date('d/M/Y H:i',$vo['create_time'])}</div>
+									<div id="comment-div-{$vo['id']}" class="comment-body">
+										<div class="comment-user pull-left" id="comment-{$vo['id']}">{$vo['comment_auther']}</div>
+										<div class="comment-tm pull-right">{:date('d/m/Y H:i',$vo['create_time'])}</div>
 										<div class="clearfix"></div>
 										<p>
 											{$vo['content']}
@@ -133,50 +138,41 @@
 											<a href="#respond" class="replay_comment" p_id = {$vo['p_id']} self_id = {$vo['id']}>回复</a>
 										</div>
 									</div>
-									<ul class="children" id="children-{$vo['self_id']}">
+									<ul class="children" id="children-{$vo['id']}">
+
+										<volist name="vo['childrens']" id="vos">
+											<li>
+												<div id="comment-div-{$vos['id']}" class="comment-body">
+													<div class="comment-user pull-left" id="comment-{$vos['id']}">{$vos['comment_auther']}</div>
+													<div class="comment-tm pull-right">{:date('d/m/Y H:i',$vos['create_time'])}</div>
+													<div class="clearfix"></div>
+													<p>
+														{$vos['content']}
+													</p>
+													<div class="reply">
+														<a href="#respond" class="replay_comment" p_id = {$vos['p_id']} self_id = {$vos['id']}>回复</a>
+													</div>
+												</div>
+												<ul class="children" id="children-{$vos['id']}">
+												</ul>
+											</li>
+										</volist>
+
+
 									</ul>
 								</li>
 							</volist>
 
 
 
-							<li>
-								<div id="comment-111" class="comment-body">
-									<div class="comment-user pull-left">阿尔维奇</div>
-									<div class="comment-tm pull-right">2015/12/01 19:48</div>
-									<div class="clearfix"></div>
-									<p>
-										发表提问的字数不是很多的情况下 页面无法显示提问内容<br>
-										json = $.parseJSON(response); 无法执行，输入字符数字有限制，是有什么原因吗？
-									</p>
-									<div class="reply">
-										<a href="#respond">回复</a>
-									</div>
-								</div>
-								<ul class="children">
-									<li>
-										<div id="comment-11" class="comment-body">
-											<div class="comment-user pull-left">阿尔维奇</div>
-											<div class="comment-tm pull-right">2015/12/01 19:48</div>
-											<div class="clearfix"></div>
-											<p>
-												发表提问的字数不是很多的情况下 页面无法显示提问内容<br>
-												json = $.parseJSON(response); 无法执行，输入字符数字有限制，是有什么原因吗？
-											</p>
-											<div class="reply">
-												<a href="#respond">回复</a>
-											</div>
-										</div>
-									</li>
-								</ul>
-							</li>
+
 
 						</ol>
-						<button class="comment-more btn btn-success btn-block">显示更多评论</button>
+						<button id="comment-more" class="comment-more btn btn-success btn-block" blog_id="{$item['id']}" page_id="2">显示更多评论</button>
 					</acticle>
 
 					<div id="respond" name="respond">
-						<h4 class="comment_count">发表评论</h4>
+						<h4 class="comment_count" id="edit-content">发表评论</h4>
 						<div class="form-horizontal" >
 							<div class="form-group">
 								<label class="col-sm-12 ">用户昵称</label>
@@ -250,7 +246,49 @@
 		return num;
 	}
 
+	//时间戳转换成时间
+	function timeStamp2String(unixTime) {
+
+		var time = new Date(unixTime * 1000);
+		//年
+		Y	= time.getUTCFullYear();
+		//月
+		if((time.getUTCMonth()+1)<10){
+			m	= '0'+(time.getUTCMonth()+1);
+		}else{
+			m	= time.getUTCMonth()+1;
+		}
+		//日
+		if(time.getUTCDate()<10){
+			d	= '0'+(time.getUTCDate()+1);
+		}else{
+			d	= time.getUTCDate()+1;
+		}
+		//时
+		if(time.getUTCHours()<10){
+			H	= "0" + (time.getUTCHours()+1);
+		}else{
+			H	= time.getUTCHours()+1;
+		}
+		//分
+		if(time.getUTCMinutes()<10){
+			i	= "0"+(time.getUTCMinutes()+1);
+		}else{
+			i	= time.getUTCMinutes()+1;
+		}
+		//秒
+		if(time.getUTCSeconds()<10){
+			s	= "0"+time.getUTCSeconds();
+		}else{
+			s	= time.getUTCSeconds();
+		}
+
+		return d+'/'+m+'/'+Y+' '+H+':'+i;
+	}
+
 	$(function(){
+
+		//检测输入的回复
 		$('#respond_content').focus(function () {
 			//转入文字时
 			$(this).keyup(function () {
@@ -266,8 +304,9 @@
 				//当前字数同步到显示提示
 				$('#num_limit').html(msg);
 			});
-			//失去焦点时边框背景归位
 		});
+
+		//确认评论与回复
 		$('#respond-sure').click(function(){
 			var content	 = $.trim($('#respond_content').val());
 			var blog_id  = parseInt($(this).attr('blog_id'));
@@ -275,6 +314,7 @@
 			if(content == '' || isNaN(blog_id) ){
 				swal('您属于非法提交','','error');return;
 			}
+			$(this).attr({'disabled':'disabled'});
 			$.ajax({
 				type:'post',
 				url:'{:U("Home/Comment/add")}',
@@ -286,37 +326,114 @@
 				},
 				dataType:"json",
 				success:function(data){
-					if(1 == data.code){
-						swal('提交成功','','success');
-						$('#respond_content').val('');
-						$('#respond-sure').attr({'p_id':0});
-
-						var _html	= '<li><div id="comment-" class="comment-body">' +
-						'<div class="comment-user pull-left" id="comment-'+data.data.id+'">'+data.data.comment_auther+'</div>' +
-						'<div class="comment-tm pull-right">' +data.data.create_time+	'</div>'+
-						'<div class="clearfix"></div>' +
-						'<p>'+content+'</p>' +
-						'<div class="reply"><a class="replay_comment" href="#respond" p_id="'+data.data.p_id+'" self_id="'+data.data.id+'">回复</a></div>' +
-						'</div><ul class="children" id="children-'+data.data.id+'"></ul></li>';
-
-						p_id == 0 ? $('#comment_list').prepend(_html) : $('#childeren-'+data.data.id).append(_html);
-
-
-						return;
-						//location.reload();/
-						// self.location='{:U("Admin/User/index",array("user_type"=>1))}';
-					}else{
+					if(0 == data.code){
 						swal('提交失败','','error');return;
 					}
+
+					swal('提交成功','','success');
+					$('#respond_content').val('');
+					$('#respond-sure').attr({'p_id':0});
+
+					var _html	= '<li><div id="comment-" class="comment-body">' ;
+						_html  += '<div class="comment-user pull-left" id="comment-'+data.data.id+'">'+data.data.comment_auther+'</div>' ;
+						_html  += '<div class="comment-tm pull-right">' +timeStamp2String(data.data.create_time)+	'</div>';
+						_html  += '<div class="clearfix"></div>' ;
+						_html  += '<p>'+content+'</p>' ;
+						_html  += '<div class="reply"><a class="replay_comment" href="#respond" p_id="'+data.data.p_id+'" self_id="'+data.data.id+'">回复</a></div>' ;
+						_html  += '</div><ul class="children" id="children-'+data.data.id+'"></ul></li>';
+
+					console.log(data);
+					p_id == 0 ? $('#comment_list').append(_html) : $('#children-'+data.data.p_id).append(_html);
+					$('#respond-sure').attr({'disabled':false});
+					//location.reload();/
+					// self.location='{:U("Admin/User/index",array("user_type"=>1))}';
+					return;
+
 				},
 			});
 		});
-
-		$('.replay_comment').click(function(){
-			var p_id	= $(this).attr('p_id');
-			$('#respond-sure').attr({'p_id':p_id});
+		//点击回复，
+		$('#comments').on('click','.replay_comment',function(){
+			var self_id		= parseInt($(this).attr('self_id'));
+			var p_id		= parseInt($(this).attr('p_id'));
+			if(0 == p_id){
+				target_id = self_id;
+			}else{
+				target_id = p_id;
+			}
+			$('#respond-sure').attr({'p_id':target_id});
+			var name_replay		= $('#comment-'+self_id).html();
+			$('#edit-content').html('@'+name_replay+'的回复 <button class="btn btn-warning" id="cancle-replay">取消恢复</button>');
+		});
+		//取消回复
+		$('#respond').on('click','#cancle-replay',function(){
+			$('#edit-content').html('发表评论')
+			$('#respond-sure').attr({'p_id':0});
 		});
 
+		//获取更多评论
+		$('#comment-more').click(function(){
+			var blog_id		= $(this).attr('blog_id');
+			var page_id		= $(this).attr('page_id');
+			$(this).attr({'disabled':'disabled'});
+			$.ajax({
+				type:'post',
+				url:'{:U("Home/Comment/get_comment_more")}',
+				data:{
+					'blog_id'			: blog_id,
+					'page_id'			: page_id,
+				},
+				dataType:"json",
+				success:function(data){
+					console.log(data);
+					if(0 == data.code){swal(data.mess,'','error');return;}
+					var _html	= '';
+					$.each(data.data,function(i,c){
+						console.log(c.id);
+						//console.log(c.childrens);
+						if(c.id == undefined){
+							$.each(c.childrens,function(i2,c2){
+								console.log(c2);
+								var _html2	= '';
+								_html2 += '<li><div id="comment-div-'+c2.id+'" class="comment-body">';
+								_html2 += '<div class="comment-user pull-left" id="comment-'+c2.id+'">'+c2.comment_auther+'</div>';
+								_html2 += '<div class="comment-tm pull-right">'+timeStamp2String(c2.create_time)+'</div>';
+								_html2 += '<div class="clearfix"></div><p>'+c2.content+'</p>';
+								_html2 += '<div class="reply">';
+								_html2 += '<a href="#respond" class="replay_comment" p_id ='+c2.p_id+' self_id ='+c2.id+'>回复</a>';
+								_html2 += '</div></div><ul class="children" id="children-'+c2.id+'"></ul></li>';
+								$('#children-'+c2.p_id).append(_html2);
+							});
+						}else{
+							_html	+= '<li><div id="comment-div-'+ c.id+'" class="comment-body">';
+							_html	+= '<div class="comment-user pull-left" id="comment-'+ c.id+'">'+ c.comment_auther+'</div>';
+							_html	+= '<div class="comment-tm pull-right">'+ timeStamp2String(c.create_time)+'</div>';
+							_html	+= '<div class="clearfix"></div><p>'+ c.content+'</p>';
+							_html	+= '<div class="reply">';
+							_html	+= '<a href="#respond" class="replay_comment" p_id='+ c.p_id+' self_id='+ c.id+'>回复</a>';
+							_html	+= '</div></div><ul class="children" id="children-'+ c.id+'">';
+						 	if(c.childrens != undefined){
+								$.each(c.childrens,function(i2,c2){
+									_html	+= '<li><div id="comment-div-'+c2.id+'" class="comment-body">';
+									_html	+= '<div class="comment-user pull-left" id="comment-'+c2.id+'">'+c2.comment_auther+'</div>';
+									_html	+= '<div class="comment-tm pull-right">'+timeStamp2String(c2.create_time)+'</div>';
+									_html	+= '<div class="clearfix"></div><p>'+c2.content+'</p>';
+									_html	+= '<div class="reply">';
+									_html	+= '<a href="#respond" class="replay_comment" p_id ='+c2.p_id+' self_id ='+c2.id+'>回复</a>';
+									_html	+= '</div></div><ul class="children" id="children-'+c2.id+'"></ul></li>';
+									_html	+= '<div class="reply">';
+								});
+							}
+							_html	+= '</ul></li>';
+						}
+					});
+					if(_html	!= '')$('#comment_list').append(_html);
+					page_id++;
+					$('#comment-more').attr({'disabled':false}).attr({'page_id':page_id});
+					return;
+				},
+			});
+		});
 	});
 
 

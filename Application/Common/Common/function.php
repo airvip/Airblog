@@ -18,6 +18,20 @@ function p($var=null) {
     }
 }
 
+//评论一维数组转二维
+function arr1_arr2($arr=array()){
+    if(empty($arr))return $arr;
+    foreach($arr as $k=>&$v){
+        if($v['p_id'] != 0){
+            $new_arr[$v['p_id']]['childrens'][]    = $v;
+        }else{
+            $new_arr[$v['id']]    = $v;
+        }
+    }
+    unset($v);
+    return $new_arr;
+}
+
 //ajax返回的数据
 function ajax_return($code = 0,$data = '',$mess = ''){
     $temp   = array(
