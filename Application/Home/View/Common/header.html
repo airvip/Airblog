@@ -7,7 +7,7 @@
 	<link rel="shortcut icon" href="__PUBLIC__/img/ico_48.ico">
 	<meta name="keywords" content="{$Think.config.KEY_WORD}" />
 	<meta name="description" content="{$Think.config.DESCRIPTION}"/>
-	<title>{$Think.config.WEB_NAME}<if condition="!empty($item['title'])">|{$item['title']}</if></title>
+	<title><if condition="!empty($item['title'])">{$item['title']}|</if>{$Think.config.WEB_NAME}</title>
 
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap.min.css">
 

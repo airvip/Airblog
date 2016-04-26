@@ -159,6 +159,12 @@ ul.children li{
 	margin-bottom: 1rem;
 	word-wrap:break-word;
 }
+#article a{
+	color:#2890FF;
+	font-weight: bolder;
+	font-size: larger;
+	text-decoration: underline;
+}
 #article p{
 	font-size: 1.7rem;
 	line-height: 2.5rem;
