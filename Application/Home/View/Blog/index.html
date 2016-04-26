@@ -86,44 +86,9 @@
 					<div class="clearfix">
 					</div>
 				</div>
-				<style>
-					.blog_comments{
-						padding: 20px;
-						background-color: #F9F9F9;
-						color: #666;
-						margin-bottom: 1rem;
-						word-wrap: break-word;
-					}
-					#comments h4,#respond h4{
-						border-bottom: 1px solid #ddd;
-						padding-bottom: 5px;
-						color: #000000;
-						font-weight: bolder;
-					}
-					#comments .comment_count b,#num_limit{
-						font-family: Constantia,Georgia;
-						font-size: 22px;
-						font-style: italic;
-						font-weight: 700;
-					}
-					.comment_list{
-						padding-left: 0px;
-					}
-					.comment_list li{
-						list-style-type: none;
-						padding: 10px 5px 0;
-					}
-					ul.children li{
-						border-top: 1px dashed #ccc;
-					}
-					.comment_list>li {
-						border-bottom: 1px dashed #ccc;
-					}
-					#respond{margin-top: 20px;}
-				</style>
 				<section class="blog_comments">
 					<acticle id="comments">
-						<h4 class="comment_count">总共 <b>{:empty($item['comment_count']) ? 0 : $item['comment_count'];}</b> 条评论</h4>
+						<h4 class="comment_count" id="comment_total">总共 <b>{:empty($item['comment_count']) ? 0 : $item['comment_count'];}</b> 条评论</h4>
 						<ol class="comment_list" id="comment_list">
 							<volist name="comment_list" id="vo">
 								<li>
@@ -226,65 +191,7 @@
 
 	window._bd_share_config={"common":{"bdSnsKey":{},"bdText":"","bdMini":"2","bdMiniList":false,"bdPic":"","bdStyle":"1","bdSize":"24"},"share":{},"selectShare":{"bdContainerClass":null,"bdSelectMiniList":["qzone","sqq","tsina","tqq","weixin"]}};with(document)0[(getElementsByTagName('head')[0]||body).appendChild(createElement('script')).src='http://bdimg.share.baidu.com/static/api/js/share.js?v=89860593.js?cdnversion='+~(-new Date()/36e5)];
 
-	/**
-	 * 统计字数
-	 * @param  字符串
-	 * @return 数组[当前字数, 最大字数]
-	 */
-	function check (str) {
-		var num = [0, 140];
-		for (var i=0; i<str.length; i++) {
-			//字符串不是中文时
-			if (str.charCodeAt(i) >= 0 && str.charCodeAt(i) <= 255){
-				num[0] = num[0] + 0.5;//当前字数增加0.5个
-				num[1] = num[1] + 0.5;//最大输入字数增加0.5个
-			}else{
-				//字符串是中文时
-				num[0]++;//当前字数增加1个
-			}
-		}
-		return num;
-	}
 
-	//时间戳转换成时间
-	function timeStamp2String(unixTime) {
-
-		var time = new Date(unixTime * 1000);
-		//年
-		Y	= time.getUTCFullYear();
-		//月
-		if((time.getUTCMonth()+1)<10){
-			m	= '0'+(time.getUTCMonth()+1);
-		}else{
-			m	= time.getUTCMonth()+1;
-		}
-		//日
-		if(time.getUTCDate()<10){
-			d	= '0'+(time.getUTCDate()+1);
-		}else{
-			d	= time.getUTCDate()+1;
-		}
-		//时
-		if(time.getUTCHours()<10){
-			H	= "0" + (time.getUTCHours()+1);
-		}else{
-			H	= time.getUTCHours()+1;
-		}
-		//分
-		if(time.getUTCMinutes()<10){
-			i	= "0"+(time.getUTCMinutes()+1);
-		}else{
-			i	= time.getUTCMinutes()+1;
-		}
-		//秒
-		if(time.getUTCSeconds()<10){
-			s	= "0"+time.getUTCSeconds();
-		}else{
-			s	= time.getUTCSeconds();
-		}
-
-		return d+'/'+m+'/'+Y+' '+H+':'+i;
-	}
 
 	$(function(){
 
@@ -311,6 +218,7 @@
 			var content	 = $.trim($('#respond_content').val());
 			var blog_id  = parseInt($(this).attr('blog_id'));
 			var p_id	 = parseInt($(this).attr('p_id'));
+			var total_num	= parseInt($('#comment_total>b').html());
 			if(content == '' || isNaN(blog_id) ){
 				swal('您属于非法提交','','error');return;
 			}
@@ -331,9 +239,11 @@
 					}
 
 					swal('提交成功','','success');
+					total_num++;
+					$('#comment_total>b').html(total_num)
 					$('#respond_content').val('');
 					$('#respond-sure').attr({'p_id':0});
-
+					$('#edit-content').html('发表评论');
 					var _html	= '<li><div id="comment-" class="comment-body">' ;
 						_html  += '<div class="comment-user pull-left" id="comment-'+data.data.id+'">'+data.data.comment_auther+'</div>' ;
 						_html  += '<div class="comment-tm pull-right">' +timeStamp2String(data.data.create_time)+	'</div>';
@@ -367,7 +277,7 @@
 		});
 		//取消回复
 		$('#respond').on('click','#cancle-replay',function(){
-			$('#edit-content').html('发表评论')
+			$('#edit-content').html('发表评论');
 			$('#respond-sure').attr({'p_id':0});
 		});
 

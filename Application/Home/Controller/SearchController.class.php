@@ -26,6 +26,7 @@ class SearchController extends CommonController {
         $field  = 'title,thumb,blog_info,create_time,edit_time,auther';
         $list   = $this->page($this->blog,C('ADMIN_PAGE'),$map,$order);
         if(false === $list)$this->error('系统出现了不可预知的问题...');
+        if(null == $list)$this->assign('err_mess','后续内容即将发布...');
         $this->assign('list',$list);
         $this->display('Home@Index/index');
     }

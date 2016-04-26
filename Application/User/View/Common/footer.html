@@ -6,7 +6,11 @@
 					<if condition="$key neq 0">|</if><a href="{$vo['link_url']}">{$vo['name']}</a>
 				</volist>
 			</p>
-			<p>{:C('COPY')} Powered by Bootstrap & Thinkphp.</p>
+			<p>
+				{:C('COPY')} Powered by Bootstrap & Thinkphp.
+				<script type="text/javascript">var cnzz_protocol = (("https:" == document.location.protocol) ? " https://" : " http://");document.write(unescape("%3Cspan id='cnzz_stat_icon_1258812921'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s11.cnzz.com/z_stat.php%3Fid%3D1258812921%26show%3Dpic1' type='text/javascript'%3E%3C/script%3E"));</script>
+				<?php require_once 'cs.php';echo '<img src="'._cnzzTrackPageView(1258812921).'" width="0" height="0"/>';?>
+			</p>
 		</div>
 	</footer>
 	

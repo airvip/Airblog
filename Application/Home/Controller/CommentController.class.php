@@ -30,7 +30,8 @@ class CommentController extends CommonController {
             $comment_auther = $user['nickname'];
             $user_id        = $_SESSION['user']['id'];
         }else{
-            $name   = ['甲','乙','丙','丁'];
+            //$name   = ['甲','乙','丙','丁'];
+            $name   = array('甲','乙','丙','丁');
             $comment_auther = '路人'.$name[rand(0,3)];
             $user_id        = 0;
         }

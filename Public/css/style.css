@@ -101,6 +101,46 @@ a:hover{color: #c90;text-decoration: none;}
 }
 
 
+/*comment css*/
+.blog_comments{
+	padding: 20px;
+	background-color: #F9F9F9;
+	color: #666;
+	margin-bottom: 1rem;
+	word-wrap: break-word;
+}
+#comments h4,#respond h4{
+	border-bottom: 1px solid #ddd;
+	padding-bottom: 5px;
+	color: #000000;
+	font-weight: bolder;
+}
+#comments .comment_count b,#num_limit{
+	font-family: Constantia,Georgia;
+	font-size: 22px;
+	font-style: italic;
+	font-weight: 700;
+}
+.comment_list{
+	padding-left: 0px;
+}
+.comment_list li{
+	list-style-type: none;
+	padding: 10px 5px 0;
+}
+ul.children li{
+	border-top: 1px dashed #ccc;
+}
+.comment_list>li {
+	border-bottom: 1px dashed #ccc;
+}
+#respond{margin-top: 20px;}
+
+
+
+
+
+
 #footer{background-color: #F9F9F9;border-top: 1px solid #ccc;padding:20px;text-align: center;}
 #footer p>a{margin: 0 5px;}
 

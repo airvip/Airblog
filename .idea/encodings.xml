@@ -18,17 +18,21 @@
     <file url="file://$PROJECT_DIR$/Application/Admin/View/Public/styles/main.css" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Common/Controller/AuthController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/BlogController.class.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Application/Home/Controller/CommentController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/CommonController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/EmptyController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/IndexController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/LoginController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/ProjectController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/Home/Controller/SearchController.class.php" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Application/Home/Controller/TestController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/Controller/BlogController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/Controller/CommonController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/Controller/EmptyController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/Controller/IndexController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/Controller/PersonController.class.php" charset="UTF-8" />
     <file url="file://$PROJECT_DIR$/Application/User/View/Person/avatar.html" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Public/pluge/sweet-alert/sweet-alert.min.js" charset="UTF-8" />
+    <file url="file://$PROJECT_DIR$/Public/pluge/sweet-alert/sweetalert.css" charset="UTF-8" />
   </component>
 </project>
