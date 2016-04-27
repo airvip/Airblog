@@ -68,4 +68,23 @@ class PersonController extends CommonController {
         $this->redirect('User/Person/avatar');
     }
 
+    //显示修改密码
+    public function pass(){
+        $this->user   = $this->user->field('nickname')->where(array('id'=>$_SESSION['user']['id']))->find();
+        $this->display();
+    }
+    //修改操作
+    public function pass_run(){
+        if(!IS_POST)$this->error('非法操作');
+        $temp   = I('post.');
+        if(empty($temp['user_pass']) || empty($temp['user_pass1']) || empty($temp['user_pass2']))$this->error('密码不能为空...');
+        if($temp['user_pass1'] != $temp['user_pass2'])$this->error('新密码不一致...');
+        $map    = array('id'=>$_SESSION['user']['id'],'user_pass'=>$temp['user_pass']);
+        $data   = md5($temp['user_pass1']);
+        $rs = $this->user->where($map)->save(array('user_pass'=>$data));
+        if(false === $rs)$this->error('更新失败,请确认旧密码正确...');
+        $this->redirect('User/Person/pass');
+    }
+
+
 }

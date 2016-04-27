@@ -63,10 +63,10 @@ class SystemController extends CommonController {
         $config = include $path;
         $temp   = I('post.');
         $config['MAIL_HOST']            = $temp['mail_host'];
+        $config['MAIL_PORT']            = $temp['mail_port'];
         $config['MAIL_FROM']            = $temp['mail_from'];
-        $config['MAIL_PASSWORD']       = $temp['mail_password'];
         $config['MAIL_FROMNAME']       = $temp['mail_fromname'];
-        $config['MAIL_USERNAME']       = $temp['mail_username'];
+        $config['MAIL_PASSWORD']       = $temp['mail_password'];
         $config['MAIL_SMTPAUTH']       = $temp['mail_smtpauth'];
         $data="<?php\r\n return ".var_export($config,true).";\r\n?>";
         if (file_put_contents($path, $data)){

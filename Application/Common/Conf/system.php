@@ -1,19 +1,24 @@
 <?php
  return array (
   'ADMIN_PAGE' => '10',
-  'REGIS_ON' => '0',
+  'REGIS_ON' => '1',
   'WEB_URL' => 'Airblog',
-  'WEB_NAME' => '那些年我什么都不懂',
-  'COPY' => '那些年我什么都不懂  陕ICP备1500284号',
-  'KEY_WORD' => '个人博客，技术博客，内涵段子，告白墙，百度云下载，资源下载，bt下载，360云下载',
-  'DESCRIPTION' => '阿尔维奇的技术博客，搞笑图片，内涵段子，云资源下载，告白墙，恋爱告白，php,phper,技术交流，资源提供,bt下载,爱分享，爱编程，php难题解决,php技术分享,软件共享,云视频下载',
-  'MAIL_HOST' => 'smtp.qq.com',
-  'MAIL_SMTPAUTH' => 'false',
-  'MAIL_USERNAME' => '980062449@qq.com',
-  'MAIL_FROM' => '980062449@qq.com',
-  'MAIL_FROMNAME' => '阿尔维奇',
-  'MAIL_PASSWORD' => '123456',
-  'MAIL_CHARSET' => 'utf-8',
-  'MAIL_ISHTML' => true,
+  'WEB_NAME' => 'AirBlog|王振北的个人博客',
+  'COPY' => 'AirBlog|王振北的个人博客  陕ICP备1500284号',
+  'KEY_WORD' => '个人博客，技术博客,响应式，PHP，Bootstrap，blog',
+  'DESCRIPTION' => 'Airblog是一款基于bootstrap的自适应的个人博客系统，是一款免费开源的个人博客',
+
+
+
+     'MAIL_HOST' => 'smtp.163.com',
+     'MAIL_PORT' => '25',
+
+     'MAIL_SMTPAUTH' => 'true',
+     'MAIL_FROM' => 'sdqhwzb@163.com',
+     'MAIL_FROMNAME' => '阿尔维奇',
+     'MAIL_PASSWORD' => 'wzb1.23456',
+
+     'ENCTYPTION_KEY'=>'Iloveyou',
+     'DOMAIN_NAME'           => 'http://www.dear521.com',
 );
 ?>

@@ -1,0 +1,81 @@
+<include file="User@Common/header"/>
+</head>
+<body>
+	<include file="User@Common/nav"/>
+
+
+
+	<div id="about">
+		<div class="container">
+			<div class="row">
+				<!--sidebar START-->
+				<include file="User@Common/sidebar"/>
+				<!--sidebar END-->
+
+				<div class="col-sm-9 col-md-9 about">
+					<include file="User@Person/nav"/>
+
+
+					<form action="{:U('User/Person/pass_run')}" method="post" class="form-horizontal">
+
+						<div class="form-group">
+							<label class="col-sm-3 control-label">旧密码</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="password" name="user_pass" required placeholder="******" value="" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">新密码</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="password" name="user_pass1" required placeholder="******" value="" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="form-group">
+							<label class="col-sm-3 control-label">重复密码</label>
+							<div class="col-sm-9 controls">
+								<div class="row">
+									<div class="col-xs-12">
+										<input type="password" name="user_pass2" required placeholder="******" value="" class="form-control"/>
+									</div>
+								</div>
+							</div>
+						</div>
+
+						<hr/>
+						<div class="form-group">
+							<div class="col-sm-6 col-sm-offset-3">
+								<button type="submit" class="btn btn-success">确认编辑</button>
+							</div>
+						</div>
+					</form>
+
+
+
+				</div>
+			</div>
+		</div>
+	</div>
+
+
+
+
+
+
+
+
+
+
+	<include file="User@Common/footer"/>
+	<script>
+		
+	</script>
+</body>
+</html>

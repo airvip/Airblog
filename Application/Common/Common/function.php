@@ -18,6 +18,21 @@ function p($var=null) {
     }
 }
 
+/**
+ * 异位或加密字符串
+ * @param unknown $value[需要加密的字符串]
+ * @param number $type [加密解密（0：加密，1：解密）]
+ * @return [加密或解密后的字符串]
+ *  */
+function encryption($value,$type=0){
+    $key= md5(C('ENCTYPTION_KEY'));
+    if(!$type){
+        return str_replace('=', '', base64_encode($value^$key));
+    }
+    $value=base64_decode($value);
+    return $value^$key;
+}
+
 //评论一维数组转二维
 function arr1_arr2($arr=array()){
     if(empty($arr))return $arr;
@@ -148,3 +163,4 @@ function is_mobile()
     }
     return $is_mobile;
 }
+

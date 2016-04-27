@@ -1,0 +1,29 @@
+<include file="Home@Common/header"/>
+<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/login.css">
+</head>
+<body>
+
+    <div class="container">
+        <div class="">
+
+            <div class="login-width">
+                <a href="{:U('Home/Index/index')}">
+                    <img src="__PUBLIC__/img/logo.png" alt="" class="img-responsive center-block">
+                </a>
+            </div>
+
+
+            <p class="login-width">尊敬的{$user['nickname']}：</p>
+            <p class="login-width">您已经注册成功，请去您的邮箱</p>
+            <p class="login-width">{$user['user_email']}</p>
+            <p class="login-width">激活登录</p>
+
+        </div>
+    </div> <!-- /container -->
+
+
+
+    <script>
+    </script>
+</body>
+</html>
