@@ -16,9 +16,9 @@
      'MAIL_SMTPAUTH' => 'true',
      'MAIL_FROM' => 'sdqhwzb@163.com',
      'MAIL_FROMNAME' => '阿尔维奇',
-     'MAIL_PASSWORD' => 'wzb1.23456',
+     'MAIL_PASSWORD' => 'sdqhilove.com',
 
-     'ENCTYPTION_KEY'=>'Iloveyou',
+     'ENCTYPTION_KEY'=>'sdqhilove.com',
      'DOMAIN_NAME'           => 'http://www.dear521.com',
 );
 ?>
