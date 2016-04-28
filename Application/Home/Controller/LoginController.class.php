@@ -57,7 +57,7 @@ class LoginController extends Controller {
         $user   = $this->user->where(array('user_email' => $temp['user_email']))->find();
         if(null != $user)$this->error('或邮箱已注册...');
         $cheack_time    = time()+3600*24;
-        $key            = encryption($temp['nickname']&$temp['user_email']&$cheack_time);
+        $key            = token_pass($temp['nickname'].'&'.$temp['user_email'].'&'.$cheack_time);
         $data   = array(
             'nickname'      => $temp['nickname'],
             'user_pass'     => md5($temp['user_pass']),
@@ -101,12 +101,13 @@ class LoginController extends Controller {
         if(!IS_GET)$this->error('非法操作');
         $temp   = I('token');
         if(empty($temp))$this->error('非法操作');
-        $user   = exp('&',encryption($temp,1));
+        $user   = explode('&',token_pass($temp,1));
         if($user[2] < time())$this->error('您的激活信息已失效，请重新注册！');//最好配合contab执行
-        $map    = array('nickname'=>$user[0],'user_email'=>$user[1],'token'=>$temp);
-        $user   = $this->user->where($map)->find();
-        if( 0 == $user['user_token'] )$this->error('您已经激活,何须重复检验？？？');
-        $rs     = $this->user->where($map)->save(array('user_token'=>0,'user_status'=>1));
+        $map    = array('nickname'=>$user[0],'user_email'=>$user[1],'reg_token'=>$temp);
+        $user_rs   = $this->user->where($map)->find();
+        if(null == $user_rs)$this->error('未发现需要激活的用户...');
+        if( 0 == $user_rs['reg_token'] )$this->error('您已经激活,何须重复检验???');
+        $rs     = $this->user->where($map)->save(array('reg_token'=>0,'user_status'=>1));
         if(false == $rs)$this->error('Sorry!激活失败...');
         $this->success('激活成功,正在跳转到登录页面',U('Home/Login/index'));
     }
