@@ -11,9 +11,13 @@
 				<h1>那些年走过的坑</h1>
 				<h4>Airblog是一款基于Bootstrap&Tp的免费博客系统...</h4>
 				<h5>
-					<a href="http://wpa.qq.com/msgrd?v=3&uin=980062449&site=qq&menu=yes" target="_blank" title="技术支持">
-						阿尔维奇
-						<span class="text-error" title="私人QQ">980062449</span>
+					<a class="btn btn-warning" href="http://wpa.qq.com/msgrd?v=3&uin=980062449&site=qq&menu=yes" target="_blank" title="技术支持">
+						<i class="fa fa-qq"></i>
+						<span class="text-error" title="QQ">阿尔维奇</span>
+					</a>
+					<a class="btn btn-success" href="https://github.com/airvip" target="_blank">
+						<i class="fa fa-github-alt"></i>
+						<span class="text-error" title="github">阿尔维奇</span>
 					</a>
 				</h5>
 			</hgroup>
@@ -45,7 +49,7 @@
 										<h4>{$vo['title']}</h4>
 										<p class="hidden-xs">{$vo['blog_info']}</p>
 										<p>
-											<span class="glyphicon glyphicon-hourglass"></span>
+											<span class="fa fa-clock-o"></span>
 											{:$vo['create_time'] == $vo['edit_time'] ? date('d/M/Y',$vo['create_time']).'发布' : date('d/M/Y',$vo['edit_time']).'修改'}&nbsp;
 											<span class="glyphicon glyphicon-eye-open"></span>
 											{$vo['view_count']} &nbsp;
