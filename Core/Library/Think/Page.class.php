@@ -141,7 +141,7 @@ class Page{
             array($this->config['header'],
                 '<li class="active"><span class="current">'.$this->nowPage. '</span></li>',
                 $up_page, $down_page, $the_first, $link_page, $the_end, $this->totalRows,
-                '<li><a class="num" href="' . $this->url($page) . '">共' .$this->totalPages. '页</a></li>'
+                '<li><span class="num" >共' .$this->totalPages. '页</span></li>'
             ),
             $this->config['theme']);
         return "<nav class='text-right'><ul class='pagination'>{$page_str}</ul></nav>";
