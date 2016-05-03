@@ -2,13 +2,17 @@
 <html lang="zh-CN">
 <head>
 	<meta charset="UTF-8">
+	<meta name="renderer" content="webkit">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<link rel="shortcut icon" href="__PUBLIC__/img/ico_48.ico">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0;">
+	
+	
 	<meta name="keywords" content="{$Think.config.KEY_WORD}" />
 	<meta name="description" content="{$Think.config.DESCRIPTION}"/>
-	<title><if condition="!empty($item['title'])">{$item['title']}|</if>{$Think.config.WEB_NAME}</title>
 
+	<title><if condition="!empty($item['title'])">{$item['title']}|</if>{$Think.config.WEB_NAME}</title>
+	
+	<link rel="shortcut icon" href="__PUBLIC__/img/ico_48.ico">
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/bootstrap.min.css">
 	<!-- font-awesome是4.5.0-->
 	<link rel="stylesheet" type="text/css" href="__PUBLIC__/css/font-awesome.min.css">
