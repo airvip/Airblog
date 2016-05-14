@@ -89,10 +89,14 @@ class CommonController extends Controller {
     {
         $count = $obj->where($where)->join($join)->count();
         $Page = new \Think\Page($count, $size);
+        foreach($where as $key=>$val) {
+            $Page->parameter[$key]   =   urlencode($val);
+        }
         //$Page->setConfig('theme','%FIRST% %UP_PAGE% %LINK_PAGE% %DOWN_PAGE% %END% 全 %TOTAL_ROW% 件');
         //$Page->setConfig('theme','%UP_PAGE% %LINK_PAGE% %DOWN_PAGE%');
         $Page->setConfig('theme','%UP_PAGE% %NOW_PAGE% %TOTAL_PAGE% %DOWN_PAGE% ');
         $show = $Page->show();
+
         $list = $obj->field($field)->where($where)->order($order)->join($join)->limit($Page->firstRow . ',' . $Page->listRows)->select();
         $this->assign('page', $show);
         $this->assign('count',$count);
