@@ -28,7 +28,8 @@ class SearchController extends CommonController {
         if(false === $list)$this->error('系统出现了不可预知的问题...');
         if(null == $list)$this->assign('err_mess','后续内容即将发布...');
         $this->assign('list',$list);
-        $this->display('Home@Index/index');
+        $this->display();
+        //$this->display('Home@Index/index');
     }
 
 
